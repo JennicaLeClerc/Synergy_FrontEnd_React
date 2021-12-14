@@ -99,7 +99,6 @@ function Footer(){
 	)
 }
 
-
 function GlobalNavBar(){
 	return(
 		<Navbar bg="dark" variant='dark' expand={false}>
@@ -132,7 +131,6 @@ function GlobalNavBar(){
 		</Navbar>
 	)
 }
-
 
 function MainPage(){
 	return(
@@ -184,7 +182,6 @@ function MainPage(){
 		</>
 	)
 }
-
 
 function User(){
 // Register - Luis
@@ -255,16 +252,11 @@ function PageRouter(){
 
 	return (
 		<Routes>
-
 				<Route exact path = "/" element={<MainPage />}/>
 				<Route exact path = "/user" element={<User />}/>
-
 				<Route exact path = "/employee" element={<Employee />}/>
-
-
 		</Routes>
 	)
 }
-
 
 export default App;
