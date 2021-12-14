@@ -249,7 +249,6 @@ function Employee(){
 }
 
 function PageRouter(){
-
 	return (
 		<Routes>
 				<Route exact path = "/" element={<MainPage />}/>
