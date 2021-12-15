@@ -83,14 +83,6 @@ const UserAccountManagement = () => {
 	)
 }
 
-function UserAccountManagementRouter(){
-	return (
-		<Routes>
-				<Route exact path = "/" element={<UserAccountManagement/>}/>
-				<Route exact path = "/edit_info" element={<UserInfoChanger />}/>
-				<Route exact path = "/change_password" element={<PasswordChanger/>}/>
-		</Routes>
-	)
-}
+
 
 export default UserAccountManagement;

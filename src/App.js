@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './SynergyLogo.png';
 import React, { useState } from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -7,7 +7,8 @@ import {
 	BrowserRouter as Router,
 	Route,
 	Routes,
-	Link
+	Link,
+	Navigate
 } from "react-router-dom";
 import { 
 	Carousel,
@@ -25,16 +26,28 @@ import {
 } from 'react-bootstrap';
 import ManagerPortal from './ManagerPortal';
 import RegisterUser from './RegisterUser';
-import UserAccountManagement from './UserAccountManagement';
+import UserAccountManagement, {UserAccountManagementRouter} from './UserAccountManagement';
 import PasswordChanger from './PasswordChanger';
 import UserInfoChanger from './UserInfoChanger';
 import LoginPage from './LoginPage';
+import ReservationsView from './ReservationView/ReservationsView';
+import parseJWT from './parseJWT';
+
+
+import FullCalendar from '@fullcalendar/react' // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+
+
+
+
 
 function App() {
+	const [JWT,updateJWT] = useState("");
 	return (
 		<>
-			<GlobalNavBar />
-			<PageRouter />
+		{console.log((JWT)? parseJWT(JWT): "not logged in")}
+			<GlobalNavBar JWT={JWT}/>
+			<PageRouter JWT={JWT} updateJWT={updateJWT}/>
 			<Footer />
 		</>
 	);
@@ -43,15 +56,18 @@ function App() {
 // <ManagerPortal /> <RegisterUser /> works
 
 
-function GlobalNavBar(){
+function GlobalNavBar({ JWT}){
 	let [currentDrop, updateCurrentDrop] = useState("none");
 	return(
 		<Navbar bg="dark" variant='dark' expand={false}>
 		<Container fluid>
 			<Row>
 				<Col>
-					<Navbar.Toggle aria-controls="offcanvasNavbar" />
-					<Navbar.Brand href="#">Synergy Hotel</Navbar.Brand>
+					<Navbar.Toggle aria-controls="offcanvasNavbar">
+					<img src={logo} width="50px"/>
+					
+					<Navbar.Brand href="#" style={{paddingLeft:"10px"}}>Synergy Hotel</Navbar.Brand>
+					</Navbar.Toggle>
 					<Navbar.Offcanvas
 						id="offcanvasNavbar"
 						aria-labelledby="offcanvasNavbarLabel"
@@ -63,7 +79,7 @@ function GlobalNavBar(){
 					<Offcanvas.Title id="offcanvasNavbarLabel"><h1>Hello!</h1></Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
-					<NavbarS1 loggedIn={true} role="MANAGER" update={updateCurrentDrop} sel={currentDrop}/>
+					<NavbarS1 role={(JWT)? parseJWT(JWT).Role[0].authority : ""} update={updateCurrentDrop} sel={currentDrop}/>
 				</Offcanvas.Body>
 			</Navbar.Offcanvas>
 			</Col>
@@ -74,18 +90,21 @@ function GlobalNavBar(){
 }
 
 function NavbarS1(props){
-	if (!props.loggedIn){
+	if (!props.role){
 		return(
-			<h1>Login</h1>
+			<Link className="hov" to="/authenticate" style={{ paddingLeft: "15%"}}>Login</Link>
 		) 
 	} else{
 		if(props.role === "USER"){
 			return(
 				<>
 					<Button className="hov" onClick ={()=>{props.update((props.sel==1)? 0:1)}} >Reservation</Button>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>New Reservation</Button>}/>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>My Reservations</Button>}/>
-					<Button className="hov">My Account</Button>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New Reservation</Link>}/>							
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>My Reservations</Link>}/>							
+					<Button className="hov" onClick ={()=>{props.update((props.sel==2)? 0:2)}} >Account</Button>																
+					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
+					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/edit" className="hov" style={{ paddingLeft: "15%"}}>Change Info</Link>}/>					
+					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/change_password" className="hov" style={{ paddingLeft: "15%"}}>Change Password</Link>}/>		
 				</>
 			)
 		}
@@ -93,19 +112,10 @@ function NavbarS1(props){
 			return(
 				<>
 					<Button className="hov" onClick ={()=>{props.update((props.sel===1)? 0:1)}} >Reservations</Button>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/> 
 					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
 					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
 					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
-					<Button className="hov" onClick ={()=>{props.update((props.sel===2)? 0:2)}} >Cleaning</Button>
-					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New</Link>}/>
-					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>My Cleaning</Link>}/>
-					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
-					<Button className="hov" onClick ={()=>{props.update((props.sel===3)? 0:3)}} >Maintenance</Button>
-					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New</Link>}/>
-					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>On Deck</Link>}/>
-					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>In Proccess</Link>}/>
-					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
 					<ShowIfMatch in={props.role} given = {"MANAGER"} cont={
 						<>
 							<Button className="hov" onClick ={()=>{props.update((props.sel===4)? 0:4)}} >Management</Button>
@@ -126,16 +136,58 @@ function ShowIfMatch(prop){
 	return(prop.cont)
 	return(<></>)
 }
+function GoHome(){
+	return(<Navigate to="/"/>)
+}
 
-function PageRouter(){
-	return (
-		<Routes>
-				<Route exact path = "/" element={<MainPage />}/>
-				<Route exact path = "/users" element={<User />}/>
-				<Route exact path = "/employee" element={<Employee />}/>
-				<Route exact path = "/authenticate" element={<LoginPage />}/>
-		</Routes>
-	)
+
+function PageRouter({JWT, updateJWT}){
+	if (!JWT){ //DONE
+		return (
+			<Routes>
+				<Route exact path = "/" element={<MainPage JWT={JWT}/>}/>
+				<Route exact path = "/users/register" element={<RegisterUser JWT={JWT}/>}/>
+				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>
+				<Route exact path = "*" element={<GoHome />}/>
+			</Routes>
+		)
+	}else if (parseJWT(JWT).Role[0].authority == "USER"){ 
+		return (
+			<Routes>
+				<Route exact path = "/" element={<MainPage JWT={JWT}/>}/>										{/*Done 	*/}
+				<Route exact path = "/users/register" element={<RegisterUser JWT={JWT}/>}/>						{/*Done 	*/}
+				<Route exact path = "/users" element={<UserAccountManagement JWT={JWT}/>}/>						
+				{/*<Route exact path = "/users/reservation/add" element={< JWT={JWT}/>}/>									*/}
+				{/*<Route exact path = "/users/reservation" element={< JWT={JWT}/>}/>										*/}
+				<Route exact path = "/users/edit" element={<UserInfoChanger JWT={JWT}/>}/>						
+				<Route exact path = "/users/change_password" element={<PasswordChanger JWT={JWT}/>}/>			
+				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done 	*/}
+				<Route exact path = "*" element={<GoHome />}/>													{/*Done 	*/}
+			</Routes>
+		)
+	}
+	else if (parseJWT(JWT).Role[0].authority == "EMPLOYEE"){
+		return (
+			<Routes>
+				<Route exact path = "/" element={<MainPage JWT={JWT}/>}/>										{/*Done */}
+				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>			
+				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
+				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
+			</Routes>
+		)
+	}
+	else {
+		return (
+			<Routes>
+				<Route exact path = "/" element={<MainPage JWT={JWT}/>}/>										{/*Done */}
+				<Route exact path = "/employee/ManagerPortal" element={<ManagerPortal JWT={JWT} />}/>			
+				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>		
+				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
+				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
+			</Routes>
+		)
+	}
+
 }
 
 function User(){
@@ -145,7 +197,6 @@ function User(){
 // Account Management - Jennica
 	return(
 		<>
-			<UserAccountManagement/>
 		</>
 	)
 }
@@ -225,7 +276,7 @@ function Footer(){
 						<Col></Col>
 						<Col md="auto" className = "text-center">
 							<br/>
-							Employee?
+							<Link to="/employee/login">Employee?</Link>
 						</Col>
 						<Col></Col>
 					</Row>
@@ -234,6 +285,26 @@ function Footer(){
 			</footer>
 		</>
 	)
+}
+
+
+function Cal(){
+	return (
+		<>
+		<br/>
+		<Container style={{width:"75%", height:"auto"}}>
+		<FullCalendar 
+			plugins={[ dayGridPlugin ]}
+			initialView="dayGridMonth"
+			events={[
+			{ title: 'event 1', start: '2021-12-15', end: '2021-12-20' },
+			{ title: 'event 2', date: '2019-04-02' }
+			]}
+		/>
+		
+		</Container>
+		</>
+		)
 }
 
 function MainPage(){
