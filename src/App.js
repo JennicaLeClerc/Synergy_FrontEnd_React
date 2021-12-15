@@ -139,7 +139,6 @@ function MainPage(){
 				<h1 className="header1">Synergy Hotel</h1>
 				<h3>Karoke - Spa - Wine Tasting</h3>
 			</div>
-
 			<Carousel>
 			<Carousel.Item>
 				<img
@@ -149,9 +148,7 @@ function MainPage(){
 					style={{objectFit:"cover"}}
 					alt="First slide"
 				/>
-				<Carousel.Caption>
-				 
-				</Carousel.Caption>
+				<Carousel.Caption></Carousel.Caption>
 			</Carousel.Item>
 			<Carousel.Item>
 				<img
@@ -161,10 +158,7 @@ function MainPage(){
 					style={{objectFit:"cover"}}
 					alt="Second slide"
 				/>
-
-				<Carousel.Caption>
-
-				</Carousel.Caption>
+				<Carousel.Caption></Carousel.Caption>
 			</Carousel.Item>
 			<Carousel.Item>
 				<img
@@ -174,9 +168,7 @@ function MainPage(){
 					style={{objectFit:"cover"}}
 					alt="Third slide"
 				/>
-
-				<Carousel.Caption>
-				</Carousel.Caption>
+				<Carousel.Caption></Carousel.Caption>
 			</Carousel.Item>
 		</Carousel>
 		</>
@@ -190,7 +182,171 @@ function User(){
 // Account Management - Jennica
 	return(
 		<>
-			<UserLogin />
+			<UserInfoChanger/>
+		</>
+	)
+}
+
+function UserAccountManagementRouter(){
+	return (
+		<Routes>
+				<Route exact path = "/" element={<UserAccountManagement/>}/>
+				<Route exact path = "/edit_info" element={<User />}/>
+				<Route exact path = "/change_password" element={<PasswordChanger/>}/>
+		</Routes>
+	)
+}
+
+function UserAccountManagement(){
+	return(
+		<>
+			<br/><br/>
+			<Container>
+				<Row>
+					<Col></Col>
+					<Col></Col>
+					<Col style = {{fontWeight:"bold", lineHeight:"30pt"}}>
+						Username:
+					</Col>
+					<Col>
+						username holder
+					</Col>
+					<Col>
+						<Button variant="outline-primary" size="sm">
+							Edit Info
+						</Button>
+					</Col>
+					<Col></Col>
+				</Row>
+				<Row>
+					<Col></Col>
+					<Col></Col>
+					<Col style = {{fontWeight:"bold", lineHeight:"30pt"}}>
+						First Name:
+					</Col>
+					<Col>
+						first name holder
+					</Col>
+					<Col></Col>
+					<Col></Col>
+				</Row>
+				<Row>
+					<Col></Col>
+					<Col></Col>
+					<Col style = {{fontWeight:"bold", lineHeight:"30pt"}}>
+						Last Name:
+					</Col>
+					<Col>
+						last name holder
+					</Col>
+					<Col></Col>
+					<Col></Col>
+				</Row>
+				<Row>
+					<Col></Col>
+					<Col></Col>
+					<Col style = {{fontWeight:"bold", lineHeight:"30pt"}}>
+						Email:
+					</Col>
+					<Col>
+						email holder
+					</Col>
+					<Col></Col>
+					<Col></Col>
+				</Row>
+			</Container>
+			<Container>
+				<Row>
+					<Col></Col>
+					<Col className = "text-center">
+						<Button variant="outline-primary" size="sm" href='#'>
+							Change Password
+						</Button>
+					</Col>
+					<Col></Col>
+				</Row>
+			</Container>
+		</>
+	)
+}
+
+function PasswordChanger(){
+	return(
+		<>
+			<br/><br/><br/>
+			<Container>
+				<Row>
+					<Col></Col>
+					<Col md="auto" className = "text-center">
+						<form id="login-form">
+							<input type="text" name="Username" id="username-field" className="login-form-field" placeholder="Username" />
+							<br/><br/>
+							<input type="password" name="Old Password" id="password-field" className="login-form-field" placeholder="Old Password" />
+							<br/><br/>
+							<input type="password" name="New Password" id="password-field" className="login-form-field" placeholder="New Password" />
+							<br/><br/>
+							<Button>
+								Login
+							</Button>
+							<br/><br/>
+							<p id="forgot-password" align="center"><a href="#">Forgot Password?</a></p>
+						</form>
+					</Col>
+					<Col></Col>
+				</Row>
+			</Container>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="hide1" id = "error">
+					<p align="center">*Username or Password are Incorrect*</p>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+		</>
+	)
+}
+
+function UserInfoChanger(){
+	return(
+		<>
+			<br/><br/><br/>
+			<Container>
+				<Row>
+					<Col></Col>
+					<Col></Col>
+					<Col>
+						current last name
+						<br/><br/>
+						current first name
+						<br/><br/>
+						current email
+						<br/><br/>
+					</Col>
+					<Col>
+						<form id="login-form">
+							<input type="text" name="firstName" id="name-field" className="login-form-field" placeholder="First Name" />
+							<br/><br/>
+							<input type="text" name="lastName" id="name-field" className="login-form-field" placeholder="Last Name" />
+							<br/><br/>
+							<input type="text" name="email" id="name-field" className="login-form-field" placeholder="Email" />
+							<br/><br/>
+						</form>
+					</Col>
+					<Col></Col>
+					<Col></Col>
+				</Row>
+			</Container>
+			<Container>
+				<Row>
+					<Col></Col>
+					<Col className = "text-center">
+						<Button className = "center" size="sm" href='#'>
+							Login
+						</Button>
+					</Col>
+					<Col></Col>
+				</Row>
+			</Container>
 		</>
 	)
 }
