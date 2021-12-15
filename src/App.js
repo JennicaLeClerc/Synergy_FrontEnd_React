@@ -155,30 +155,28 @@ function NavbarS1(props){
 		if(props.role === "EMPLOYEE" || props.role === "MANAGER"){
 			return(
 				<>
-
-				<Button className="hov" onClick ={()=>{props.update((props.sel===1)? 0:1)}} >Reservations</Button>
-				<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/>
-				<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
-				<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
-				<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
-				<Button className="hov" onClick ={()=>{props.update((props.sel===2)? 0:2)}} >Cleaning</Button>
-				<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New</Link>}/>
-				<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>My Cleaning</Link>}/>
-				<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
-				<Button className="hov" onClick ={()=>{props.update((props.sel===3)? 0:3)}} >Maintenance</Button>
-				<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New</Link>}/>
-				<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>On Deck</Link>}/>
-				<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>In Proccess</Link>}/>
-				<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
-				<ShowIfMatch in={props.role} given = {"MANAGER"} cont={
-					<>
-					<Button className="hov" onClick ={()=>{props.update((props.sel===4)? 0:4)}} >Management</Button>
-					<ShowIfMatch in={props.sel} given = {4} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New Employee</Link>}/>
-					<ShowIfMatch in={props.sel} given = {4} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All Employees</Link>}/>
-					</>
-				
-				}/>
-				<Link to="/" className="hov" style={{ paddingLeft: "4%", paddingTop: "2%"}}>My Account</Link>
+					<Button className="hov" onClick ={()=>{props.update((props.sel===1)? 0:1)}} >Reservations</Button>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
+					<Button className="hov" onClick ={()=>{props.update((props.sel===2)? 0:2)}} >Cleaning</Button>
+					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New</Link>}/>
+					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>My Cleaning</Link>}/>
+					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
+					<Button className="hov" onClick ={()=>{props.update((props.sel===3)? 0:3)}} >Maintenance</Button>
+					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New</Link>}/>
+					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>On Deck</Link>}/>
+					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>In Proccess</Link>}/>
+					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
+					<ShowIfMatch in={props.role} given = {"MANAGER"} cont={
+						<>
+							<Button className="hov" onClick ={()=>{props.update((props.sel===4)? 0:4)}} >Management</Button>
+							<ShowIfMatch in={props.sel} given = {4} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New Employee</Link>}/>
+							<ShowIfMatch in={props.sel} given = {4} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All Employees</Link>}/>
+						</>
+					}/>
+					<Link to="/" className="hov" style={{ paddingLeft: "4%", paddingTop: "2%"}}>My Account</Link>
 				</>
 			)
 

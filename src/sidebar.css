@@ -39,11 +39,13 @@
 	border: transparent;
 
 }
+
 .hov:focus{
 	background-color: transparent;
 	border: transparent;
 	box-shadow: none !important;
 }
+
 /* Position and style the close button (top right corner) */
 .sidebar .closebtn {
 	position: absolute;
