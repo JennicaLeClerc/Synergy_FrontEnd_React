@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Button, Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const RegisterUser = () => {
     const [userIntput, setUserInput] = useState({
         firstName: '',
@@ -11,6 +12,7 @@ const RegisterUser = () => {
         password: ''
     });
 
+	let navigate = useNavigate();
     const {firstName, lastName, email, username, password} = userIntput;
 
     const change = (e) => {
@@ -23,6 +25,12 @@ const RegisterUser = () => {
         //axios post call
       const response = await axios.post("http://localhost:5000/users", userIntput);
         console.log(response);
+
+		if(response.status == 200){
+			navigate("/")
+		}
+
+		
     }
 
     return (
@@ -50,28 +58,28 @@ const RegisterUser = () => {
 
                             <div >
                             <div >
-                                <label for="firstName">First Name</label>
+                                <label htmlFor="firstName">First Name</label>
                                 <input type="text" className="form-control" value={firstName} name="firstName" placeholder="Enter First Name" onChange={(e)=> change(e)} required/>
                                 <br/>
                             </div>
 
                             <div >
-                                <label for="lastName">Last Name</label>
+                                <label htmlFor="lastName">Last Name</label>
                                 <input type="text" className="form-control" value={lastName}  name="lastName" placeholder="Enter Last Name" onChange={(e)=> change(e)} required/>
                                     <br />
                             </div>
                             <div className="form-group">
-                                <label for="email">Email</label>
+                                <label htmlFor="email">Email</label>
                                 <input type="text" className="form-control" value={email} name="email" placeholder="Enter Email" onChange={(e)=> change(e)} required/>
                                     <br />
                             </div>
                             <div className="form-group">
-                                <label for="userName">User Name</label>
+                                <label htmlFor="userName">User Name</label>
                                     <input type="text" className="form-control" value={username} name="username" placeholder="Enter User Name" onChange={(e)=> change(e)} required/>
                                     <br />
                             </div>
                             <div className="form-group">
-                                <label for="password">Password</label>
+                                <label htmlFor="password">Password</label>
                                 <input type="password" className="form-control" value={password} name="password" placeholder="Enter Password" onChange={(e)=> change(e)} required/>
                                     <br />
                             </div>     

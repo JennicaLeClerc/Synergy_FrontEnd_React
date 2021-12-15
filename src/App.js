@@ -20,6 +20,9 @@ import {
 	Row,
 	Col
 } from 'react-bootstrap';
+import LoginPage from './LoginPage';
+import RegisterUser from './RegisterUser';
+
 
 function App() {
 	return (
@@ -295,12 +298,12 @@ function PasswordChanger(){
 					<Col></Col>
 				</Row>
 			</Container>
-			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="hide1" id = "error">
+			<div className="row">
+				<div className="col-sm-4"></div>
+				<div className="hide1" id = "error">
 					<p align="center">*Username or Password are Incorrect*</p>
 				</div>
-				<div class="col-sm-4"></div>
+				<div className="col-sm-4"></div>
 			</div>
 		</>
 	)
@@ -374,12 +377,12 @@ function UserLogin(){
 					<Col></Col>
 				</Row>
 			</Container>
-			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="hide1" id = "error">
+			<div className="row">
+				<div className="col-sm-4"></div>
+				<div className="hide1" id = "error">
 					<p align="center">*Username or Password are Incorrect*</p>
 				</div>
-				<div class="col-sm-4"></div>
+				<div className="col-sm-4"></div>
 			</div>
 		</>
 	)
@@ -410,6 +413,8 @@ function PageRouter(){
 				<Route exact path = "/" element={<MainPage />}/>
 				<Route exact path = "/user" element={<User />}/>
 				<Route exact path = "/employee" element={<Employee />}/>
+				<Route exact path = "/authenticate" element={<LoginPage/>} />
+				<Route exact path = "/users" element={<RegisterUser/>} />
 		</Routes>
 	)
 }
