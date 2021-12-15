@@ -10,6 +10,7 @@ import {
 	Container,
 	Row,
 	Col,
+	Form
 } from "react-bootstrap";
 import axios from "axios";
 import UserInfoChanger from "./UserInfoChanger";
@@ -22,66 +23,60 @@ const UserAccountManagement = () => {
 			<Container>
 				<Row>
 					<Col></Col>
-					<Col></Col>
-					<Col style = {{fontWeight:"bold", lineHeight:"30pt"}}>
-						Username:
+					<Col>
+						<Form.Group as={Row} className="mb-3" controlId="formPlainUsername">
+							<Form.Label column sm="3" style = {{fontWeight:"bold"}}>
+								Username
+							</Form.Label>
+							<Col sm="9">
+								<Form.Control  plaintext readOnly type="Username" placeholder="Current Username" />
+							</Col>
+						</Form.Group>
+						<Form.Group as={Row} className="mb-3" controlId="formPlainPassword">
+							<Form.Label column sm="3" style = {{fontWeight:"bold"}}>
+								Password
+							</Form.Label>
+							<Col sm="9">
+								<Form.Control  plaintext readOnly type="password" placeholder="****************" />
+							</Col>
+						</Form.Group>
+						<Form.Group as={Row} className="mb-3" controlId="formPlainFirstName">
+							<Form.Label column sm="3" style = {{fontWeight:"bold"}}>
+								First Name
+							</Form.Label>
+							<Col sm="9">
+								<Form.Control  plaintext readOnly type="First Name" placeholder="Current First Name" />
+							</Col>
+						</Form.Group>
+						<Form.Group as={Row} className="mb-3" controlId="formPlainLastName">
+							<Form.Label column sm="3" style = {{fontWeight:"bold"}}>
+								Last Name
+							</Form.Label>
+							<Col sm="9">
+								<Form.Control  plaintext readOnly type="Last Name" placeholder="Current Last Name" />
+							</Col>
+						</Form.Group>
+						<Form.Group as={Row} className="mb-3" controlId="formPlainEmail">
+							<Form.Label column sm="3" style = {{fontWeight:"bold"}}>
+								Email
+							</Form.Label>
+							<Col sm="9">
+								<Form.Control  plaintext readOnly type="Email" placeholder="email@email.com" />
+							</Col>
+						</Form.Group>
 					</Col>
 					<Col>
-						username holder
+						<Row>
+							<Button className="mb-3" variant="outline-primary" size="sm" href='#' style={{width:"25%"}}>
+								Edit Info
+							</Button>
+						</Row>
+						<Row>
+							<Button className="mb-3" variant="outline-primary" size="sm" href='#' style={{width:"40%"}}>
+								Change Password
+							</Button>
+						</Row>
 					</Col>
-					<Col>
-						<Button variant="outline-primary" size="sm" href='#'>
-							Edit Info
-						</Button>
-					</Col>
-					<Col></Col>
-				</Row>
-				<Row>
-					<Col></Col>
-					<Col></Col>
-					<Col style = {{fontWeight:"bold", lineHeight:"30pt"}}>
-						First Name:
-					</Col>
-					<Col>
-						first name holder
-					</Col>
-					<Col></Col>
-					<Col></Col>
-				</Row>
-				<Row>
-					<Col></Col>
-					<Col></Col>
-					<Col style = {{fontWeight:"bold", lineHeight:"30pt"}}>
-						Last Name:
-					</Col>
-					<Col>
-						last name holder
-					</Col>
-					<Col></Col>
-					<Col></Col>
-				</Row>
-				<Row>
-					<Col></Col>
-					<Col></Col>
-					<Col style = {{fontWeight:"bold", lineHeight:"30pt"}}>
-						Email:
-					</Col>
-					<Col>
-						email holder
-					</Col>
-					<Col></Col>
-					<Col></Col>
-				</Row>
-			</Container>
-			<Container>
-				<Row>
-					<Col></Col>
-					<Col className = "text-center">
-						<Button variant="outline-primary" size="sm" href='#'>
-							Change Password
-						</Button>
-					</Col>
-					<Col></Col>
 				</Row>
 			</Container>
 		</>

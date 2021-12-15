@@ -26,6 +26,8 @@ import {
 import ManagerPortal from './ManagerPortal';
 import RegisterUser from './RegisterUser';
 import UserAccountManagement from './UserAccountManagement';
+import PasswordChanger from './PasswordChanger';
+import UserInfoChanger from './UserInfoChanger';
 
 function App() {
 	return (
@@ -122,6 +124,16 @@ function ShowIfMatch(prop){
 	if (prop.in === prop.given)
 	return(prop.cont)
 	return(<></>)
+}
+
+function PageRouter(){
+	return (
+		<Routes>
+				<Route exact path = "/" element={<MainPage />}/>
+				<Route exact path = "/user" element={<User />}/>
+				<Route exact path = "/employee" element={<Employee />}/>
+		</Routes>
+	)
 }
 
 function User(){
@@ -265,8 +277,6 @@ function MainPage(){
 	)
 }
 
-
-
 function UserLogin(){
 	return(
 		<>
@@ -298,16 +308,6 @@ function UserLogin(){
 				<div class="col-sm-4"></div>
 			</div>
 		</>
-	)
-}
-
-function PageRouter(){
-	return (
-		<Routes>
-				<Route exact path = "/" element={<MainPage />}/>
-				<Route exact path = "/user" element={<User />}/>
-				<Route exact path = "/employee" element={<Employee />}/>
-		</Routes>
 	)
 }
 

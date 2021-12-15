@@ -3,7 +3,9 @@ import {
 	Button, 
 	Container,
 	Row,
-	Col
+	Col,
+	FloatingLabel,
+	Form
 } from "react-bootstrap";
 import axios from "axios";
 
@@ -14,26 +16,32 @@ function UserInfoChanger(){
 			<Container>
 				<Row>
 					<Col></Col>
-					<Col></Col>
 					<Col>
-						current last name
-						<br/><br/>
-						current first name
-						<br/><br/>
-						current email
-						<br/><br/>
+						<Form.Group as={Row} className="mb-3" controlId="formFirstName">
+							<Form.Label column sm="3">
+								First Name
+							</Form.Label>
+							<Col sm="9">
+								<Form.Control type="firstName" placeholder="Current First Name" />
+							</Col>
+						</Form.Group>
+						<Form.Group as={Row} className="mb-3" controlId="formLastName">
+							<Form.Label column sm="3">
+								Last Name
+							</Form.Label>
+							<Col sm="9">
+								<Form.Control type="lastName" placeholder="Current Last Name" />
+							</Col>
+						</Form.Group>
+						<Form.Group as={Row} className="mb-3" controlId="formEmail">
+							<Form.Label column sm="3">
+								Email
+							</Form.Label>
+							<Col sm="9">
+								<Form.Control type="email" placeholder="email@email.com" />
+							</Col>
+						</Form.Group>
 					</Col>
-					<Col>
-						<form id="login-form">
-							<input type="text" name="firstName" id="name-field" className="login-form-field" placeholder="First Name" />
-							<br/><br/>
-							<input type="text" name="lastName" id="name-field" className="login-form-field" placeholder="Last Name" />
-							<br/><br/>
-							<input type="text" name="email" id="name-field" className="login-form-field" placeholder="Email" />
-							<br/><br/>
-						</form>
-					</Col>
-					<Col></Col>
 					<Col></Col>
 				</Row>
 			</Container>
