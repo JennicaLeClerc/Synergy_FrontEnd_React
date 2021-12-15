@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 //let isLoggedin = []useState();
 
-const LoginPage = () => {
+const LoginPage = ({JWT, updateJWT}) => {
 	const [userInput, setUserInput] = useState({
 		username:'',
 		password:'',
@@ -29,17 +29,21 @@ const LoginPage = () => {
 
 	const submit = async (e) => {
 		e.preventDefault();
-
-	
-
-		const response = await axios.post("http://localhost:5000/authenticate", userInput);
-	
 		
-		if(response.status == 200){
-			navigate("/");
+
+		try{
+			const response = await axios.post("http://localhost:5000/authenticate", userInput).then(resp => resp);
+	
+			console.log(response);
+			if(response.status == 200){
+				updateJWT(response.data.jwt)
+				navigate("/");
+			}
+		} catch (e){
+			console.log(e)
 		}
 
-		console.log(response);
+
 
 	}
 
