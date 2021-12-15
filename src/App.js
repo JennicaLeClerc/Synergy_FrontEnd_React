@@ -1,6 +1,8 @@
 import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import './sidebar.css'
 import {
 	BrowserRouter as Router,
 	Route,
@@ -18,7 +20,8 @@ import {
 	Button,
 	FormControl,
 	Row,
-	Col
+	Col,
+	Accordion
 } from 'react-bootstrap';
 
 function App() {
@@ -73,7 +76,7 @@ function Footer(){
 							Valet Parking
 						</Col>
 					</Row>
-					<Row  className = "text-center">
+					<Row	className = "text-center">
 						<Col>
 							34764
 						</Col>
@@ -100,36 +103,93 @@ function Footer(){
 }
 
 function GlobalNavBar(){
+	let [currentDrop, updateCurrentDrop] = useState("none");
 	return(
 		<Navbar bg="dark" variant='dark' expand={false}>
 		<Container fluid>
-			<Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand>
-			<Navbar.Toggle aria-controls="offcanvasNavbar" />
+			<Row>
+				<Col>
+		<Navbar.Toggle aria-controls="offcanvasNavbar" />
+		<Navbar.Brand href="#">Synergy Hotel</Navbar.Brand>
+		
+			
 			<Navbar.Offcanvas
 				id="offcanvasNavbar"
 				aria-labelledby="offcanvasNavbarLabel"
-				placement="end"
+				placement="start"
 				className="bg-dark text-white"
+				style = {{width:"300px"}}
 			>
-			<Offcanvas.Header closeButton>
-				<Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
-			</Offcanvas.Header>
-			<Offcanvas.Body>
-				<Nav className="justify-content-end flex-grow-1 pe-3">
-					<NavDropdown title="Dropdown" id="offcanvasNavbarDropdown"	>
-						<NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-						<NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-						<NavDropdown.Divider />
-						<NavDropdown.Item href="#action5">
-							Something else here
-						</NavDropdown.Item>
-					</NavDropdown>
-					</Nav>
+				<Offcanvas.Header closeButton>
+					<Offcanvas.Title id="offcanvasNavbarLabel"><h1>Hello!</h1></Offcanvas.Title>
+				</Offcanvas.Header>
+				<Offcanvas.Body>
+					<NavbarS1 loggedIn={true} role="MANAGER" update={updateCurrentDrop} sel={currentDrop}/>
 				</Offcanvas.Body>
 			</Navbar.Offcanvas>
+			</Col>
+			</Row>
 		</Container>
 		</Navbar>
 	)
+}
+function NavbarS1(props){
+	if (!props.loggedIn){
+		return(
+			<h1>Login</h1>
+		) 
+	} else{
+		if(props.role === "USER"){
+
+			return(
+				<>
+				<Button className="hov" onClick ={()=>{props.update((props.sel==1)? 0:1)}} >Reservation</Button>
+				<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>New Reservation</Button>}/>
+				<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>My Reservations</Button>}/>
+				<Button className="hov">My Account</Button>
+
+				</>
+			)
+		}
+		if(props.role === "EMPLOYEE" || props.role === "MANAGER"){
+			return(
+				<>
+
+				<Button className="hov" onClick ={()=>{props.update((props.sel===1)? 0:1)}} >Reservations</Button>
+				<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>Pending</Button>}/>
+				<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Button>}/>
+				<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>Current</Button>}/>
+				<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>All</Button>}/>
+				<Button className="hov" onClick ={()=>{props.update((props.sel===2)? 0:2)}} >Cleaning</Button>
+				<ShowIfMatch in={props.sel} given = {2} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>New</Button>}/>
+				<ShowIfMatch in={props.sel} given = {2} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>My Cleaning</Button>}/>
+				<ShowIfMatch in={props.sel} given = {2} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>All</Button>}/>
+				<Button className="hov" onClick ={()=>{props.update((props.sel===3)? 0:3)}} >Maintenance</Button>
+				<ShowIfMatch in={props.sel} given = {3} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>New</Button>}/>
+				<ShowIfMatch in={props.sel} given = {3} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>On Deck</Button>}/>
+				<ShowIfMatch in={props.sel} given = {3} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>In Proccess</Button>}/>
+				<ShowIfMatch in={props.sel} given = {3} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>All</Button>}/>
+				<ShowIfMatch in={props.role} given = {"MANAGER"} cont={
+					<>
+					<Button className="hov" onClick ={()=>{props.update((props.sel===4)? 0:4)}} >Management</Button>
+					<ShowIfMatch in={props.sel} given = {4} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>New Employee</Button>}/>
+					<ShowIfMatch in={props.sel} given = {4} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>All Employees</Button>}/>
+					
+					</>
+				
+				}/>
+				<Button className="hov">My Account</Button>
+				</>
+			)
+
+		}
+	}
+}
+
+function ShowIfMatch(prop){
+	if (prop.in === prop.given)
+	return(prop.cont)
+	return(<></>)
 }
 
 function MainPage(){
