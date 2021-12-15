@@ -141,14 +141,12 @@ function NavbarS1(props){
 		) 
 	} else{
 		if(props.role === "USER"){
-
 			return(
 				<>
-				<Button className="hov" onClick ={()=>{props.update((props.sel==1)? 0:1)}} >Reservation</Button>
-				<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>New Reservation</Button>}/>
-				<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>My Reservations</Button>}/>
-				<Button className="hov">My Account</Button>
-
+					<Button className="hov" onClick ={()=>{props.update((props.sel==1)? 0:1)}} >Reservation</Button>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>New Reservation</Button>}/>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Button className="hov" style={{ paddingLeft: "15%"}}>My Reservations</Button>}/>
+					<Button className="hov">My Account</Button>
 				</>
 			)
 		}
