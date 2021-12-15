@@ -20,6 +20,8 @@ import {
 	Row,
 	Col
 } from 'react-bootstrap';
+import ManagerPortal from './ManagerPortal';
+import RegisterUser from './RegisterUser';
 
 function App() {
 	return (
@@ -31,6 +33,7 @@ function App() {
         
 	);
 }
+
 // <ManagerPortal /> <RegisterUser /> works
 function Footer(){
 	return (
@@ -212,7 +215,7 @@ function UserAccountManagement(){
 						username holder
 					</Col>
 					<Col>
-						<Button variant="outline-primary" size="sm">
+						<Button variant="outline-primary" size="sm" href='#'>
 							Edit Info
 						</Button>
 					</Col>

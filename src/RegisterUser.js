@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Button, Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import axios from "axios";
+
 const RegisterUser = () => {
     const [userIntput, setUserInput] = useState({
         firstName: '',
