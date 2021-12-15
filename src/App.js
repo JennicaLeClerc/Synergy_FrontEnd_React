@@ -28,10 +28,10 @@ function App() {
 			<PageRouter />
 			<Footer />
 		</>
-
+        
 	);
 }
-
+// <ManagerPortal /> <RegisterUser /> works
 function Footer(){
 	return (
 		<>
