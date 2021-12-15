@@ -196,37 +196,37 @@ function MainPage(){
 				<h3>Karoke - Spa - Wine Tasting</h3>
 			</div>
 			<Carousel>
-			<Carousel.Item>
-				<img
-					className="d-block w-100"
-					src="https://i.postimg.cc/DfJ16RWv/one-Bedroom.jpg"
-					height="400"
-					style={{objectFit:"cover"}}
-					alt="First slide"
-				/>
-				<Carousel.Caption></Carousel.Caption>
-			</Carousel.Item>
-			<Carousel.Item>
-				<img
-					className="d-block w-100"
-					src="https://i.postimg.cc/k5YtFyqR/2-Bedrooms.jpg"
-					height="400"
-					style={{objectFit:"cover"}}
-					alt="Second slide"
-				/>
-				<Carousel.Caption></Carousel.Caption>
-			</Carousel.Item>
-			<Carousel.Item>
-				<img
-					className="d-block w-100"
-					src="https://i.postimg.cc/0yc6PC6X/3-Bedrooms.jpg"
-					height="400"
-					style={{objectFit:"cover"}}
-					alt="Third slide"
-				/>
-				<Carousel.Caption></Carousel.Caption>
-			</Carousel.Item>
-		</Carousel>
+				<Carousel.Item>
+					<img
+						className="d-block w-100"
+						src="https://i.postimg.cc/DfJ16RWv/one-Bedroom.jpg"
+						height="400"
+						style={{objectFit:"cover"}}
+						alt="First slide"
+					/>
+					<Carousel.Caption></Carousel.Caption>
+				</Carousel.Item>
+				<Carousel.Item>
+					<img
+						className="d-block w-100"
+						src="https://i.postimg.cc/k5YtFyqR/2-Bedrooms.jpg"
+						height="400"
+						style={{objectFit:"cover"}}
+						alt="Second slide"
+					/>
+					<Carousel.Caption></Carousel.Caption>
+				</Carousel.Item>
+				<Carousel.Item>
+					<img
+						className="d-block w-100"
+						src="https://i.postimg.cc/0yc6PC6X/3-Bedrooms.jpg"
+						height="400"
+						style={{objectFit:"cover"}}
+						alt="Third slide"
+					/>
+					<Carousel.Caption></Carousel.Caption>
+				</Carousel.Item>
+			</Carousel>
 		</>
 	)
 }
