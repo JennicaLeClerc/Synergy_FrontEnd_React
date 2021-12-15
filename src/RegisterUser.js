@@ -1,24 +1,31 @@
 import React, {useState} from "react";
-import { Button, Container } from "react-bootstrap";
-import { Row, Col } from "react-bootstrap";
+import { 
+	Button, 
+	Container,
+	Row,
+	Col
+} from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+
 const RegisterUser = () => {
-    const [userIntput, setUserInput] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        username: '',
-        password: ''
-    });
+	const [userIntput, setUserInput] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		username: '',
+		password: ''
+	});
 
 	let navigate = useNavigate();
     const {firstName, lastName, email, username, password} = userIntput;
 
-    const change = (e) => {
-        e.preventDefault();
-        setUserInput({...userIntput, [e.target.name]: e.target.value});
-    }
+
+	const change = (e) => {
+		e.preventDefault();
+		setUserInput({...userIntput, [e.target.name]: e.target.value});
+	}
 
     const submit = async (e) => {
         e.preventDefault();
@@ -28,33 +35,31 @@ const RegisterUser = () => {
 
 		if(response.status == 200){
 			navigate("/")
-		}
-
-		
+		}	
     }
 
-    return (
-        <body >
-            <nav id="nav-placeholder"></nav>
-                    <div style={{ backgroundColor: '#e9ecef', 
-                            display: 'flex', justifyContent: 'center', paddingTop:'30px'}} >
-                            <h1>Synergy Hotel Management System</h1>
-                      </div> 
-            <div style={{
-                backgroundColor: '#e9ecef',
-                display: 'flex', justifyContent: 'center', paddingBottom:'40px', 
-                marginBottom: '30px'
-            }}>
-                <h3>Create A New Account</h3>
-                             </div>                          
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm-4">
-                    </div>
-                    <div className="col-sm-4 color">
-                        <form className="register" style={{
-                            backgroundColor: "#f7f7f7", color: '#f26926', display: "block", margin: "10px",  fontSize: "larger", fontWeight:"600", borderRadius:'10px'
-                        }} onSubmit={(e) => submit(e)}>
+	return (
+		<body >
+			<nav id="nav-placeholder"></nav>
+					<div style={{ backgroundColor: '#e9ecef', 
+							display: 'flex', justifyContent: 'center', paddingTop:'30px'}} >
+							<h1>Synergy Hotel Management System</h1>
+					</div> 
+			<div style={{
+				backgroundColor: '#e9ecef',
+				display: 'flex', justifyContent: 'center', paddingBottom:'40px', 
+				marginBottom: '30px'
+			}}>
+				<h3>Create A New Account</h3>
+							 </div>						  
+			<div className="container">
+				<div className="row">
+					<div className="col-sm-4">
+					</div>
+					<div className="col-sm-4 color">
+						<form className="register" style={{
+							backgroundColor: "#f7f7f7", color: '#f26926', display: "block", margin: "10px",  fontSize: "larger", fontWeight:"600", borderRadius:'10px'
+						}} onSubmit={(e) => submit(e)}>
 
                             <div >
                             <div >
@@ -98,6 +103,6 @@ const RegisterUser = () => {
             <br />
         </body>
     );
-}
+					}
 
 export default RegisterUser;
