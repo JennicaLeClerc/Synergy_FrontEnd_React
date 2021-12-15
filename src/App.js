@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './SynergyLogo.png';
 import React, { useState } from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -49,8 +49,11 @@ function GlobalNavBar(){
 		<Container fluid>
 			<Row>
 				<Col>
-					<Navbar.Toggle aria-controls="offcanvasNavbar" />
-					<Navbar.Brand href="#">Synergy Hotel</Navbar.Brand>
+					<Navbar.Toggle aria-controls="offcanvasNavbar">
+					<img src={logo} width="50px"/>
+					
+					<Navbar.Brand href="#" style={{paddingLeft:"10px"}}>Synergy Hotel</Navbar.Brand>
+					</Navbar.Toggle>
 					<Navbar.Offcanvas
 						id="offcanvasNavbar"
 						aria-labelledby="offcanvasNavbarLabel"
