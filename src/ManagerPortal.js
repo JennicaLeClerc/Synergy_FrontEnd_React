@@ -1,5 +1,10 @@
 import React, {useState} from "react";
-import { Button, Container, Form, FormCheck } from "react-bootstrap";
+import { 
+	Button, 
+	Container, 
+	Form, 
+	FormCheck 
+} from "react-bootstrap";
 import axios from "axios";
 
 const ManagerPortal = () => {
