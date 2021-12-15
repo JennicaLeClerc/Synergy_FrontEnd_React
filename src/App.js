@@ -28,6 +28,7 @@ import RegisterUser from './RegisterUser';
 import UserAccountManagement from './UserAccountManagement';
 import PasswordChanger from './PasswordChanger';
 import UserInfoChanger from './UserInfoChanger';
+import LoginPage from './LoginPage';
 
 function App() {
 	return (
@@ -133,8 +134,9 @@ function PageRouter(){
 	return (
 		<Routes>
 				<Route exact path = "/" element={<MainPage />}/>
-				<Route exact path = "/user" element={<User />}/>
+				<Route exact path = "/users" element={<User />}/>
 				<Route exact path = "/employee" element={<Employee />}/>
+				<Route exact path = "/authenticate" element={<LoginPage />}/>
 		</Routes>
 	)
 }
