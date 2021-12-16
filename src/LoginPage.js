@@ -12,11 +12,11 @@ import { useNavigate } from "react-router-dom";
 
 //let isLoggedin = []useState();
 
-const LoginPage = ({JWT, updateJWT}) => {
+const LoginPage = ({JWT, updateJWT,userType}) => {
 	const [userInput, setUserInput] = useState({
 		username:'',
 		password:'',
-		role:'USER'
+		role:userType
 	});
 
 	let navigate = useNavigate();

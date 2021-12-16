@@ -36,6 +36,7 @@ import parseJWT from './parseJWT';
 
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import UserReservation from './UserReservation';
 
 
 
@@ -147,7 +148,8 @@ function PageRouter({JWT, updateJWT}){
 			<Routes>
 				<Route exact path = "/" element={<MainPage JWT={JWT}/>}/>
 				<Route exact path = "/users/register" element={<RegisterUser JWT={JWT}/>}/>
-				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>
+				<Route exact path = "/employee/login" element={<LoginPage JWT={JWT} updateJWT={updateJWT} userType="EMPLOYEE"/>}/>
+				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} userType="USER"/>}/>
 				<Route exact path = "*" element={<GoHome />}/>
 			</Routes>
 		)
@@ -158,7 +160,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/users/register" element={<RegisterUser JWT={JWT}/>}/>						{/*Done 	*/}
 				<Route exact path = "/users" element={<UserAccountManagement JWT={JWT}/>}/>						
 				{/*<Route exact path = "/users/reservation/add" element={< JWT={JWT}/>}/>									*/}
-				{/*<Route exact path = "/users/reservation" element={< JWT={JWT}/>}/>										*/}
+				<Route exact path = "/users/reservation" element={<UserReservation JWT={JWT}/>}/>
 				<Route exact path = "/users/edit" element={<UserInfoChanger JWT={JWT}/>}/>						
 				<Route exact path = "/users/change_password" element={<PasswordChanger JWT={JWT}/>}/>			
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done 	*/}
@@ -288,24 +290,7 @@ function Footer(){
 }
 
 
-function Cal(){
-	return (
-		<>
-		<br/>
-		<Container style={{width:"75%", height:"auto"}}>
-		<FullCalendar 
-			plugins={[ dayGridPlugin ]}
-			initialView="dayGridMonth"
-			events={[
-			{ title: 'event 1', start: '2021-12-15', end: '2021-12-20' },
-			{ title: 'event 2', date: '2019-04-02' }
-			]}
-		/>
-		
-		</Container>
-		</>
-		)
-}
+
 
 function MainPage(){
 	return(
