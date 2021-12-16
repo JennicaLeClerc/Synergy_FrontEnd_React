@@ -76,7 +76,7 @@ const EmployeeAccountManagement = ({JWT}) => {
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formPlainEmail">
 							<Form.Label column sm="3" style = {{fontWeight:"bold"}}>
-								Email
+								Employee Type
 							</Form.Label>
 							<Col sm="9">
 								<Form.Control  plaintext readOnly type="Employee Type" placeholder={employeeInput.employeeType} />
