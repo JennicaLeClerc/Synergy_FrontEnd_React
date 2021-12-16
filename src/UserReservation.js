@@ -8,31 +8,31 @@ import { Container } from "react-bootstrap";
 
 
 export default function UserReservation({JWT}){
-
+	const colors = {APPROVED:"green",CANCELLED:"black",REJECTED:"red",PENDING:"yellow" }
+	const [res,updateRes] = useState([])
+	useEffect(()=>{ allReservations(); },[])
 	const allReservations = async () => {
-		
-		const response = await axios.get(Endpoint + "/reservations/username", { headers: { "Authorization": `Bearer ${JWT}` }, params: {username:parseJWT(JWT).sub, pageNumber: 0, pageSize: 10000, sortBy: 'reservationID' } }).then(
+		console.log("Bearer "+JWT)
+		const response = await axios.post(Endpoint + "/reservations/username",null ,{ headers: { "Authorization": "Bearer "+JWT }, params: {username:parseJWT(JWT).sub, pageNumber: 0, pageSize: 10000, sortBy: 'reservationID' } }).then(
 			(data) => data
 		)
 		console.log('hit2')
-		console.log(response.data)
+		updateRes([...response.data.content])
 	}
 
-	allReservations();
 	return (
 		<>
-		<br/>
-		<Container style={{width:"75%", height:"auto"}}>
-		<FullCalendar 
-			plugins={[ dayGridPlugin ]}
-			initialView="dayGridMonth"
-			events={[
-			{ title: 'event 1', start: '2021-12-15', end: '2021-12-20' },
-			{ title: 'event 2', date: '2019-04-02' }
-			]}
-		/>
-		
-		</Container>
+			<br/>
+			<Container style={{width:"75%", height:"auto"}}>
+			<FullCalendar 
+				plugins={[ dayGridPlugin ]}
+				initialView="dayGridMonth"
+				eventClick={(e)=>console.log(e)}
+				events={res.map((reserve)=>{return {title:reserve.status, start:reserve.startDate, end:reserve.endDate, color:colors[reserve.status]}})}
+			/>
+			
+			</Container>
 		</>
-		)
+	)
+		
 }

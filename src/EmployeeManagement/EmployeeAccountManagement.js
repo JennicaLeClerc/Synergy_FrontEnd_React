@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
 	BrowserRouter as Router,
-	Route,
-	Routes,
 	Link
 } from "react-router-dom";
 import { 
@@ -13,28 +11,25 @@ import {
 	Form
 } from "react-bootstrap";
 import axios from "axios";
-import parseJWT from "./parseJWT";
+import parseJWT from "../parseJWT";
+import Endpoint from "../Endpoint";
 
-const UserAccountManagement = ({JWT}) => {
-	const [userInput, setUserInput] = useState({
+const EmployeeAccountManagement = ({JWT}) => {
+	const [employeeInput, setEmployeeInput] = useState({
 		username:'',
 		password:'',
 		firstName:'',
 		lastName:'',
-		email:''
+		employeeType: ''
 	});
 
-	const change = (e) => {
-		e.preventDefault();
-		setUserInput({...userInput, [e.target.name]: e.target.value, ['Content-type']: 'application/json'})
-	}
 
 	useEffect(()=>{ Submit(); },[])
 	const Submit = async (e) => {		
-		var uID = parseJWT(JWT).ID;
-		const response = await axios.get("http://localhost:5000/users/" + uID, {headers:{"Authorization":"Bearer "+JWT}}).then(resp => resp);
+		var eID = parseJWT(JWT).ID;
+		const response = await axios.get(Endpoint + "/employee/" + eID, {headers:{"Authorization":"Bearer "+JWT}}).then(resp => resp);
 		console.log(response);
-		setUserInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, email:response.data.email});
+		setEmployeeInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, employeeType:response.data.employeeType});
 	}
 
 	return(
@@ -49,7 +44,7 @@ const UserAccountManagement = ({JWT}) => {
 								Username
 							</Form.Label>
 							<Col sm="9">
-							<	Form.Control  plaintext readOnly type="username" placeholder={userInput.username} />
+							<	Form.Control  plaintext readOnly type="username" placeholder={employeeInput.username} />
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formPlainPassword">
@@ -65,7 +60,7 @@ const UserAccountManagement = ({JWT}) => {
 								First Name
 							</Form.Label>
 							<Col sm="9">
-								<Form.Control  plaintext readOnly type="First Name" placeholder={userInput.firstName} />
+								<Form.Control  plaintext readOnly type="First Name" placeholder={employeeInput.firstName} />
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formPlainLastName">
@@ -73,29 +68,29 @@ const UserAccountManagement = ({JWT}) => {
 								Last Name
 							</Form.Label>
 							<Col sm="9">
-								<Form.Control  plaintext readOnly type="Last Name" placeholder={userInput.lastName} />
+								<Form.Control  plaintext readOnly type="Last Name" placeholder={employeeInput.lastName} />
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formPlainEmail">
 							<Form.Label column sm="3" style = {{fontWeight:"bold"}}>
-								Email
+								Employee Type
 							</Form.Label>
 							<Col sm="9">
-								<Form.Control  plaintext readOnly type="Email" placeholder={userInput.email} />
+								<Form.Control  plaintext readOnly type="Employee Type" placeholder={employeeInput.employeeType} />
 							</Col>
 						</Form.Group>
 					</Col>
 					<Col>
 						<Row>
 							<Button className="mb-3" size="sm"  style={{backgroundColor: "#f26926", width:"25%"}}>
-								<Link to="/users/edit" style={{color:"white", textDecoration:"none"}}>
+								<Link to="/employee/edit" style={{color:"white", textDecoration:"none"}}>
 									Edit Info
 								</Link>
 							</Button>
 						</Row>
 						<Row>
 							<Button className="mb-3" variant="outline-primary" size="sm" style={{backgroundColor: "#f26926", width:"40%"}}>
-								<Link to="/users/change_password" style={{color:"white", textDecoration:"none"}}>
+								<Link to="/employee/change_password" style={{color:"white", textDecoration:"none"}}>
 									Change Password
 								</Link>
 							</Button>
@@ -108,5 +103,4 @@ const UserAccountManagement = ({JWT}) => {
 }
 
 
-
-export default UserAccountManagement;
+export default EmployeeAccountManagement;

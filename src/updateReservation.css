@@ -1,0 +1,19 @@
+.submission {
+    width: 200px;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+        background-color: #f26926;
+    margin-left:15px;
+  }
+  .resForm {
+   width:500px;
+    background-color: #f2f2f2;
+    padding:75px;
+    margin-left:450px;
+  }
+  .labelCss{padding-right:15px;}
+  

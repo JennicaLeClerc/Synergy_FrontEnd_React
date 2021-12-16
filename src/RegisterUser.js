@@ -1,12 +1,10 @@
 import React, {useState} from "react";
 import { 
-	Button, 
-	Container,
-	Row,
-	Col
+	Button
 } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Endpoint from "./Endpoint";
 
 const RegisterUser = () => {
 	const [userIntput, setUserInput] = useState({
@@ -28,7 +26,7 @@ const RegisterUser = () => {
 	const submit = async (e) => {
 		e.preventDefault();
 		//axios post call
-	  const response = await axios.post("http://localhost:5000/users", userIntput);
+	  const response = await axios.post(Endpoint + "/users", userIntput);
 		console.log(response);
 
 		if(response.status == 200){
@@ -65,7 +63,6 @@ const RegisterUser = () => {
 								<input type="text" className="form-control" value={firstName} name="firstName" placeholder="Enter First Name" onChange={(e)=> change(e)} required/>
 								<br/>
 							</div>
-
 							<div >
 								<label for="lastName">Last Name</label>
 								<input type="text" className="form-control" value={lastName}  name="lastName" placeholder="Enter Last Name" onChange={(e)=> change(e)} required/>
@@ -96,9 +93,9 @@ const RegisterUser = () => {
 				</div>
 			</div>
 			<br/>
-			<br />
-			<br />
-			<br />
+			<br/>
+			<br/>
+			<br/>
 		</body>
 	);
 }

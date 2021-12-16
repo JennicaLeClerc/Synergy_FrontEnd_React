@@ -1,6 +1,11 @@
 import React, {useState} from "react";
-import { Button, Container, Form, FormCheck } from "react-bootstrap";
+import { 
+	Button, 
+	Form,
+  FormCheck
+} from "react-bootstrap";
 import axios from "axios";
+import Endpoint from "./Endpoint";
 
 const ManagerPortal = () => {
     const [userInput, setUserInput] = useState({
@@ -100,7 +105,8 @@ const ManagerPortal = () => {
                     </div>
                 </div>
             </div>
-        </>    )
+        </>
+     )
 }
 
 export default ManagerPortal;

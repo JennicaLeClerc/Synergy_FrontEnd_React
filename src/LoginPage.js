@@ -9,10 +9,11 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Endpoint from "./Endpoint";
 
 //let isLoggedin = []useState();
 
-const LoginPage = ({JWT, updateJWT,userType}) => {
+const LoginPage = ({JWT, updateJWT, userType}) => {
 	const [userInput, setUserInput] = useState({
 		username:'',
 		password:'',
@@ -31,7 +32,7 @@ const LoginPage = ({JWT, updateJWT,userType}) => {
 		e.preventDefault();
 		
 		try{
-			const response = await axios.post("http://localhost:5000/authenticate", userInput).then(resp => resp);
+			const response = await axios.post(Endpoint + "/authenticate", userInput).then(resp => resp);
 	
 			console.log(response);
 			if(response.status == 200){
@@ -73,6 +74,5 @@ const LoginPage = ({JWT, updateJWT,userType}) => {
 	</>
 	)
 }
-
 
 export default LoginPage;

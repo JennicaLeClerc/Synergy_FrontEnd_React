@@ -1,5 +1,3 @@
-import { Table } from "react-bootstrap";
-
 const Reservations = ({props}) => {
    
     return (
