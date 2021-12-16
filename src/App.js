@@ -4,7 +4,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './sidebar.css'
 import {
-	BrowserRouter as Router,
 	Route,
 	Routes,
 	Link,
@@ -14,21 +13,15 @@ import {
 	Carousel,
 	Container,
 	Navbar,
-	NavDropdown,
 	Offcanvas,
-	Nav,
-	Form,
 	Button,
-	FormControl,
 	Row,
 	Col,
-	Accordion
 } from 'react-bootstrap';
 import ManagerPortal from './ManagerPortal';
 import RegisterUser from './RegisterUser';
 import UserAccountManagement from './UserManagement/UserAccountManagement';
 import UserInfoChanger from './UserManagement/UserInfoChanger';
-import EmployeeAccountManagement from './EmployeeManagement/EmployeeAccountManagement';
 import PasswordChanger from './PasswordChanger';
 import LoginPage from './LoginPage';
 import ReservationsView from './ReservationView/ReservationsView';
@@ -37,11 +30,12 @@ import CreateReservation from './createReservation';
 import UserReservation from './UserReservation';
 import AllEmployee from './AllEmployee';
 
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
+
 
 function App() {
-	const [JWT,updateJWT] = useState("");
+	localStorage.setItem("jwt", localStorage.getItem("jwt")|| "" )
+	const [JWT,updateJWT] = useState(localStorage.getItem("jwt"));
+	localStorage.setItem("jwt", JWT)
 	return (
 		<>
 		{console.log((JWT)? parseJWT(JWT): "not logged in")}
@@ -53,6 +47,7 @@ function App() {
 }
 
 // <ManagerPortal /> <RegisterUser /> works
+
 function GlobalNavBar({ JWT}){
 	let [currentDrop, updateCurrentDrop] = useState("none");
 	return(
@@ -89,7 +84,10 @@ function GlobalNavBar({ JWT}){
 function NavbarS1(props){
 	if (!props.role){
 		return(
+			<>
 			<Link className="hov" to="/authenticate" style={{ paddingLeft: "15%"}}>Login</Link>
+			<Link className="hov" to="/users/register" style={{ paddingLeft: "15%"}}>Register</Link>
+			</>
 		) 
 	} else{
 		if(props.role === "USER"){
@@ -102,6 +100,7 @@ function NavbarS1(props){
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/edit" className="hov" style={{ paddingLeft: "15%"}}>Change Info</Link>}/>					
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/change_password" className="hov" style={{ paddingLeft: "15%"}}>Change Password</Link>}/>		
+					<Link to="/logout" className="hov" style={{ paddingLeft: "4%", paddingTop: "2%"}}>Logout </Link>
 				</>
 			)
 		}
@@ -109,14 +108,10 @@ function NavbarS1(props){
 			return(
 				<>
 					<Button className="hov" onClick ={()=>{props.update((props.sel===1)? 0:1)}} >Reservations</Button>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/> 
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
-					<Button className="hov" onClick ={()=>{props.update((props.sel==2)? 0:2)}} >Account</Button>																
-					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
-					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee/edit" className="hov" style={{ paddingLeft: "15%"}}>Change Info</Link>}/>					
-					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee/change_password" className="hov" style={{ paddingLeft: "15%"}}>Change Password</Link>}/>	
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/> 
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
 					<ShowIfMatch in={props.role} given = {"MANAGER"} cont={
 						<>
 							<Button className="hov" onClick ={()=>{props.update((props.sel===4)? 0:4)}} >Management</Button>
@@ -125,6 +120,7 @@ function NavbarS1(props){
 						</>
 					}/>
 					<Link to="/" className="hov" style={{ paddingLeft: "4%", paddingTop: "2%"}}>My Account</Link>
+					<Link to="/logout" className="hov" style={{ paddingLeft: "4%", paddingTop: "2%"}}>Logout </Link>
 				</>
 			)
 
@@ -141,6 +137,10 @@ function ShowIfMatch(prop){
 function GoHome(){
 	return(<Navigate to="/"/>)
 }
+function Logout({updateJWT,JWT}){
+	updateJWT("");
+	return(<Navigate to="/"/>)
+}
 
 function PageRouter({JWT, updateJWT}){
 	if (!JWT){ //DONE
@@ -150,21 +150,24 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/users/register" element={<RegisterUser JWT={JWT}/>}/>
 				<Route exact path = "/employee/login" element={<LoginPage JWT={JWT} updateJWT={updateJWT} userType="EMPLOYEE"/>}/>
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} userType="USER"/>}/>
+				<Route exact path = "/logout" element={<Logout JWT={JWT} updateJWT={updateJWT}/>}/>
 				<Route exact path = "*" element={<GoHome />}/>
 			</Routes>
 		)
 	}else if (parseJWT(JWT).Role[0].authority == "USER"){ 
 		return (
 			<Routes>
-				<Route exact path = "/" element={<MainPage JWT={JWT}/>}/>										{/*Done 	*/}
-				<Route exact path = "/users/register" element={<RegisterUser JWT={JWT}/>}/>						{/*Done 	*/}
-				<Route exact path = "/users" element={<UserAccountManagement JWT={JWT}/>}/>						{/*Done 	*/}
-				<Route exact path = "/users/reservation/add" element={<CreateReservation JWT={JWT}/>}/>			{/*			*/}
-				<Route exact path = "/users/reservation" element={<UserReservation JWT={JWT}/>}/>
-				<Route exact path = "/users/edit" element={<UserInfoChanger JWT={JWT}/>}/>						
-				<Route exact path = "/users/change_password" element={<PasswordChanger JWT={JWT}/>}/>			
-				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done 	*/}
-				<Route exact path = "*" element={<GoHome />}/>													{/*Done 	*/}
+				<Route exact path = "/" 						element={<MainPage JWT={JWT}/>}/>										{/*Done 	*/}
+				<Route exact path = "/users/register" 			element={<RegisterUser JWT={JWT}/>}/>						{/*Done 	*/}
+				<Route exact path = "/users" 					element={<UserAccountManagement JWT={JWT}/>}/>						
+				<Route exact path = "/users/reservation/add" 	element={<CreateReservation JWT={JWT}/>}/>			{/*			*/}
+				<Route exact path = "/users/reservation" 		element={<UserReservation JWT={JWT}/>}/>
+				<Route exact path = "/users/edit" 				element={<UserInfoChanger JWT={JWT}/>}/>						
+				<Route exact path = "/users/change_password" 	element={<PasswordChanger JWT={JWT}/>}/>			
+				<Route exact path = "/authenticate" 			element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done 	*/}
+				<Route exact path = "/logout" 					element={<Logout JWT={JWT} updateJWT={updateJWT}/>}/>
+				<Route exact path = "*" 						element={<GoHome />}/>													{/*Done 	*/}
+
 			</Routes>
 		)
 	}
@@ -174,8 +177,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/" element={<MainPage JWT={JWT}/>}/>										{/*Done */}
 				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>			
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
-				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT={JWT}/>}/>
-				<Route exact path = "/employee/change_password" element={<PasswordChanger JWT={JWT}/>}/>								
+				<Route exact path = "/logout" element={<Logout JWT={JWT} updateJWT={updateJWT}/>}/>
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>
 		)
@@ -187,12 +189,12 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/employee/ManagerPortal" element={<ManagerPortal JWT={JWT} />}/>			
 				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>		
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
-				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT={JWT}/>}/>
-				<Route exact path = "/employee/change_password" element={<PasswordChanger JWT={JWT}/>}/>													
+				<Route exact path = "/logout" element={<Logout JWT={JWT} updateJWT={updateJWT}/>}/>
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>
 		)
 	}
+
 }
 
 function User(){
@@ -361,12 +363,12 @@ function UserLogin(){
 					<Col></Col>
 				</Row>
 			</Container>
-			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="hide1" id = "error">
+			<div className="row">
+				<div className="col-sm-4"></div>
+				<div className="hide1" id = "error">
 					<p align="center">*Username or Password are Incorrect*</p>
 				</div>
-				<div class="col-sm-4"></div>
+				<div className="col-sm-4"></div>
 			</div>
 		</>
 	)

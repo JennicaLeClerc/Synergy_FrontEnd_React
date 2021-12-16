@@ -13,6 +13,7 @@ const Reservation = ({JWT}) => {
 	let navigate = useNavigate;
 	let jsonPayLoad = parseJWT(JWT);
 	let userReserveID = parseInt(jsonPayLoad.ID);
+	let Navigate = useNavigate();
 
  	const [formValue, updateFormValue] = React.useState({
 		startDate: '',
@@ -41,7 +42,7 @@ const Reservation = ({JWT}) => {
 			const response = await axios.post("http://localhost:5000/reservations/save", formValue, axiosConfig);
 
 			if(response.status == 200){
-				navigate("/");
+				Navigate("/");
 			}
 		 }catch (e){
 			 console.log(e);

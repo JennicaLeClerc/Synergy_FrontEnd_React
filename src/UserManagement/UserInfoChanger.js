@@ -4,7 +4,6 @@ import {
 	Container,
 	Row,
 	Col,
-	FloatingLabel,
 	Form
 } from "react-bootstrap";
 import axios from "axios";
