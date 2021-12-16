@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import Reservations from "./Reservations";
 import { Table } from "react-bootstrap";
+import Endpoint from "../Endpoint";
 
 const ReservationsView = ({JWT}) => {
     const [show, setShow] = useState({
@@ -13,7 +14,7 @@ const ReservationsView = ({JWT}) => {
     });
 
     const {pending, upcoming, current, all} = show;
-    const url = "http://localhost:5000/reservations";
+    const url = Endpoint+"/reservations";
     const [props, setProps] = useState([]);
     //GET NEW JWT FOR TEST. DELTE WHEN JWT WORKS
 

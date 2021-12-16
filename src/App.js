@@ -35,6 +35,7 @@ import ReservationsView from './ReservationView/ReservationsView';
 import parseJWT from './parseJWT';
 import CreateReservation from './createReservation';
 import UserReservation from './UserReservation';
+import AllEmployee from './AllEmployee';
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -61,7 +62,7 @@ function GlobalNavBar({ JWT}){
 				<Col>
 					<Navbar.Toggle aria-controls="offcanvasNavbar">
 					<img src={logo} width="50px"/>
-					
+
 					<Navbar.Brand href="#" style={{paddingLeft:"10px"}}>Synergy Hotel</Navbar.Brand>
 					</Navbar.Toggle>
 					<Navbar.Offcanvas
@@ -119,8 +120,8 @@ function NavbarS1(props){
 					<ShowIfMatch in={props.role} given = {"MANAGER"} cont={
 						<>
 							<Button className="hov" onClick ={()=>{props.update((props.sel===4)? 0:4)}} >Management</Button>
-							<ShowIfMatch in={props.sel} given = {4} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New Employee</Link>}/>
-							<ShowIfMatch in={props.sel} given = {4} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All Employees</Link>}/>
+							<ShowIfMatch in={props.sel} given={4} cont={<Link to="/employee/ManagerPortal" className="hov" style={{ paddingLeft: "15%"}}>New Employee</Link>}/>
+							<ShowIfMatch in={props.sel} given={4} cont={<Link to="/employee/all" className="hov" style={{ paddingLeft: "15%"}}>All Employees</Link>}/>
 						</>
 					}/>
 				</>

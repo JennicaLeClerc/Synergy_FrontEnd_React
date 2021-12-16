@@ -6,6 +6,7 @@ import {
 	FormCheck 
 } from "react-bootstrap";
 import axios from "axios";
+import Endpoint from "./Endpoint";
 
 const ManagerPortal = () => {
 	const [userIntput, setUserInput] = useState({
@@ -31,7 +32,7 @@ const ManagerPortal = () => {
 		console.log('submited')
 		e.preventDefault();
 		//axios post call
-		const response = await axios.post("http://localhost:5000/employee", userIntput).then(data => data);
+		const response = await axios.post(Endpoint+"/employee", userIntput).then(data => data);
 		console.log(response);
 	}
 
