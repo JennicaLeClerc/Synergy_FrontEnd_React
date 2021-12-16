@@ -23,11 +23,6 @@ const EmployeeAccountManagement = ({JWT}) => {
 		employeeType: ''
 	});
 
-	const change = (e) => {
-		e.preventDefault();
-		setEmployeeInput({...employeeInput, [e.target.name]: e.target.value, ['Content-type']: 'application/json'})
-	}
-
 	useEffect(()=>{ Submit(); },[])
 	const Submit = async (e) => {		
 		var eID = parseJWT(JWT).ID;

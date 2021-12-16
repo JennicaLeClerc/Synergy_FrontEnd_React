@@ -112,10 +112,10 @@ function NavbarS1(props){
 			return(
 				<>
 					<Button className="hov" onClick ={()=>{props.update((props.sel===1)? 0:1)}} >Reservations</Button>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/> 
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/> 
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
 					<Button className="hov" onClick ={()=>{props.update((props.sel==2)? 0:2)}} >Account</Button>																
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee/edit" className="hov" style={{ paddingLeft: "15%"}}>Change Info</Link>}/>					
