@@ -4,7 +4,7 @@ import { Dropdown } from "react-bootstrap";
 import Reservations from "./Reservations";
 import { Table } from "react-bootstrap";
 
-const ReservationsView = () => {
+const ReservationsView = ({JWT}) => {
     const [show, setShow] = useState({
     all: true,
     pending: false, 
@@ -16,7 +16,7 @@ const ReservationsView = () => {
     const url = "http://localhost:5000/reservations";
     const [props, setProps] = useState([]);
     //GET NEW JWT FOR TEST. DELTE WHEN JWT WORKS
-    const JWT = "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJzdWIiOiJqdWFhYW5uIiwiSUQiOjEsImV4cCI6MTYzOTYwNDQyMCwiaWF0IjoxNjM5NjA0MTIwfQ.1dnsg2xVqNO5g22CpaC8i-5ExSh0UbbGN8AnnokvuuM"
+
     const showPending = async (e) => {
         e.preventDefault();
         const response = await axios.get(url + "/status/pending", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 10, sortBy:'reservationID'}}).then(
