@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import parseJWT from "../parseJWT";
+import Endpoint from "../Endpoint";
 
 const EmployeeAccountManagement = ({JWT}) => {
 	const [employeeInput, setEmployeeInput] = useState({
@@ -30,7 +31,7 @@ const EmployeeAccountManagement = ({JWT}) => {
 	useEffect(()=>{ Submit(); },[])
 	const Submit = async (e) => {		
 		var eID = parseJWT(JWT).ID;
-		const response = await axios.get("http://localhost:5000/employee/" + eID, {headers:{"Authorization":"Bearer "+JWT}}).then(resp => resp);
+		const response = await axios.get(Endpoint + "/employee/" + eID, {headers:{"Authorization":"Bearer "+JWT}}).then(resp => resp);
 		console.log(response);
 		setEmployeeInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, employeeType:response.data.employeeType});
 	}

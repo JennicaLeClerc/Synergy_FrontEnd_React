@@ -9,6 +9,7 @@ import {
 	Alert
 } from "react-bootstrap";
 import axios from "axios";
+import Endpoint from "./Endpoint";
 
 function PasswordChanger(){
 	return(

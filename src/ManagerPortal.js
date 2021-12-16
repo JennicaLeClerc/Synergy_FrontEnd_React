@@ -32,7 +32,7 @@ const ManagerPortal = () => {
 		console.log('submited')
 		e.preventDefault();
 		//axios post call
-		const response = await axios.post(Endpoint+"/employee", userIntput).then(data => data);
+		const response = await axios.post("http://localhost:5000/employee", userIntput);
 		console.log(response);
 	}
 
