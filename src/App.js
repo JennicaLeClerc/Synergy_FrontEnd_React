@@ -29,6 +29,7 @@ import RegisterUser from './RegisterUser';
 import UserAccountManagement from './UserManagement/UserAccountManagement';
 import UserInfoChanger from './UserManagement/UserInfoChanger';
 import EmployeeAccountManagement from './EmployeeManagement/EmployeeAccountManagement';
+import EmployeeInfoChanger from './EmployeeManagement/EmployeeInfoChanger';
 import PasswordChanger from './PasswordChanger';
 import LoginPage from './LoginPage';
 import ReservationsView from './ReservationView/ReservationsView';
@@ -163,7 +164,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/users" element={<UserAccountManagement JWT={JWT}/>}/>						{/*Done 	*/}
 				<Route exact path = "/users/reservation/add" element={<CreateReservation JWT={JWT}/>}/>			{/*			*/}
 				<Route exact path = "/users/reservation" element={<UserReservation JWT={JWT}/>}/>
-				<Route exact path = "/users/edit" element={<UserInfoChanger JWT={JWT}/>}/>						
+				<Route exact path = "/users/edit" element={<UserInfoChanger JWT={JWT}/>}/>						{/*Done 	*/}
 				<Route exact path = "/users/change_password" element={<PasswordChanger JWT={JWT}/>}/>			
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done 	*/}
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done 	*/}
@@ -177,6 +178,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>			
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
 				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT={JWT}/>}/>				{/*Done */}
+				<Route exact path = "/employee/edit" element={<EmployeeInfoChanger JWT={JWT}/>}/>
 				<Route exact path = "/employee/change_password" element={<PasswordChanger JWT={JWT}/>}/>								
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>
@@ -190,6 +192,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>		
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
 				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT={JWT}/>}/>				{/*Done */}
+				<Route exact path = "/employee/edit" element={<EmployeeInfoChanger JWT={JWT}/>}/>				{/*Done */}
 				<Route exact path = "/employee/change_password" element={<PasswordChanger JWT={JWT}/>}/>													
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>
