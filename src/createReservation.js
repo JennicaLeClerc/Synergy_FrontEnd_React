@@ -65,25 +65,25 @@ const Reservation = ({JWT}) => {
 		</div>	
 		<form className="resForm">
 		<h3>Book A New Reservation</h3>
-	<label>Your Name</label>
-			<input type="text" name="fullName" value={formValue.fullName} /><br/><br/>
-		<label>Your Email</label>
-			<input type="text" name ="email" value={formValue.email}/><br/><br/>
-		<label>Your Phone </label>
-			<input type="text" name="phone" value={formValue.phone} /><br/><br/>
-		<label>Adults</label> 
+	<label className="labelClass">Your Name</label>
+			<input type="text" className="textSelect" name="fullName" value={formValue.fullName} /><br/><br/>
+		<label className="labelClass">Your Email</label>
+			<input type="text" className="textSelect" name ="email" value={formValue.email}/><br/><br/>
+		<label className="labelClass">Your Phone </label>
+			<input type="text" className="textSelect" name="phone" value={formValue.phone} /><br/><br/>
+		<label className="labelClass">Adults</label> 
 			<input type="number" name="adults" value={formValue.adults} /><br/><br/>
 		
-		<label>Children </label>
+		<label className="labelClass">Children </label>
 			<input type="number" name="children" value={formValue.children} /><br/><br/>
 		
-		<label>Check-in Date</label>
+		<label className="labelClass">Check-in Date</label>
 			<input type="date" name="startDate" value={formValue.checkin} onChange={handleChange} /><br/><br/>
 		
-		<label>Check-out Date </label>
+		<label className="labelClass">Check-out Date </label>
 			<input type="date" name="endDate" value={formValue.checkout} onChange={handleChange}  /><br/><br/>
 	
-		<label>Select Room Preference </label><br/><br/>
+		<label className="labelClass">Select Room Preference </label><br/><br/>
 		<select name="choice" value={formValue.choice}>
 			<option value="">Choose a Room from the List</option>
 			<option value="connecting">1 Bed</option>
@@ -91,10 +91,10 @@ const Reservation = ({JWT}) => {
 			<option value="adjacent">3 Beds</option>
 		</select><br/><br/>
 		
-	<label>Anything Else?</label>
+	<label className="labelClass">Anything Else?</label>
 	<textarea value="accommodations" value={formValue.accommodations} onChange={handleChange}></textarea><br/><br/>
 						
-	<input type="submit" />
+	<input type="text" className="submitClass" />
 		</form>
 		</body>
 	)
