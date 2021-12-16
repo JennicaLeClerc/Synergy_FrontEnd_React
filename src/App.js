@@ -88,7 +88,10 @@ function GlobalNavBar({ JWT}){
 function NavbarS1(props){
 	if (!props.role){
 		return(
+			<>
 			<Link className="hov" to="/authenticate" style={{ paddingLeft: "15%"}}>Login</Link>
+			<Link className="hov" to="/users/register" style={{ paddingLeft: "15%"}}>Register</Link>
+			</>
 		) 
 	} else{
 		if(props.role === "USER"){
