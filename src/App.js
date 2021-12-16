@@ -36,6 +36,7 @@ import parseJWT from './parseJWT';
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import UserReservation from './UserReservation';
+import AllEmployee from './AllEmployee';
 
 function App() {
 	const [JWT,updateJWT] = useState("");
@@ -60,7 +61,7 @@ function GlobalNavBar({ JWT}){
 				<Col>
 					<Navbar.Toggle aria-controls="offcanvasNavbar">
 					<img src={logo} width="50px"/>
-					
+
 					<Navbar.Brand href="#" style={{paddingLeft:"10px"}}>Synergy Hotel</Navbar.Brand>
 					</Navbar.Toggle>
 					<Navbar.Offcanvas
@@ -114,8 +115,8 @@ function NavbarS1(props){
 					<ShowIfMatch in={props.role} given = {"MANAGER"} cont={
 						<>
 							<Button className="hov" onClick ={()=>{props.update((props.sel===4)? 0:4)}} >Management</Button>
-							<ShowIfMatch in={props.sel} given = {4} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New Employee</Link>}/>
-							<ShowIfMatch in={props.sel} given = {4} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All Employees</Link>}/>
+							<ShowIfMatch in={props.sel} given={4} cont={<Link to="/employee/ManagerPortal" className="hov" style={{ paddingLeft: "15%"}}>New Employee</Link>}/>
+							<ShowIfMatch in={props.sel} given={4} cont={<Link to="/employee/all" className="hov" style={{ paddingLeft: "15%"}}>All Employees</Link>}/>
 						</>
 					}/>
 					<Link to="/" className="hov" style={{ paddingLeft: "4%", paddingTop: "2%"}}>My Account</Link>
@@ -179,6 +180,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/employee/ManagerPortal" element={<ManagerPortal JWT={JWT} />}/>			
 				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>		
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
+				<Route exact path = "/employee/all" element={<AllEmployee JWT={JWT} />}/>
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>
 		)

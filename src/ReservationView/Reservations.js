@@ -1,10 +1,8 @@
-import { Table } from "react-bootstrap";
 
 const Reservations = ({props}) => {
    
     return (
         <>
-        {console.log(props)}
             <tbody>
                 <tr>
                     <td>{props.reservationID}</td>
