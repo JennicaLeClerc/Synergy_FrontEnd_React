@@ -6,13 +6,11 @@ import {
 	Col,
 	Form
 } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import parseJWT from "../parseJWT";
 import Endpoint from "../Endpoint";
 
 function UserInfoChanger({JWT}){
-	let navigate = useNavigate();
 
 	// Getting current info
 	const [userInput, setUserInput] = useState({
@@ -31,27 +29,68 @@ function UserInfoChanger({JWT}){
 		setUserInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, email:response.data.email});
 	}
 
+	// Updating userInfo
 	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer "+JWT}};
 
 	const [userFirstName, setUserFirstName] = useState({
 		firstName:''
+	});
+	const [userLastName, setUserLastName] = useState({
+		lastName:''
+	});
+	const [userEmail, setUserEmail] = useState({
+		email:''
 	});
 
 	const changeFirstName = (e) => {
 		e.preventDefault();
 		setUserFirstName({ ...userFirstName, [e.target.name]: e.target.value });
 	}
+	const changeLastName = (e) => {
+		e.preventDefault();
+		setUserLastName({ ...userLastName, [e.target.name]: e.target.value });
+	}
+	const changeEmail = (e) => {
+		e.preventDefault();
+		setUserEmail({ ...userEmail, [e.target.name]: e.target.value });
+	}
 
 	const submitFirstName = async (e) => {
 		console.log('submited');
 		console.log(userFirstName);
 		e.preventDefault();
-		//axios post call
+		//axios put call
 		var uID = parseJWT(JWT).ID;
 		const response = await axios.put(Endpoint + "/users/firstName/" + uID, userFirstName.firstName, axiosConfig);
 		console.log(response);
 		if(response.status === 200){
 			setUserFirstName({firstName:''});
+			Submit();
+		}
+	}
+	const submitLastName = async (e) => {
+		console.log('submited');
+		console.log(userLastName);
+		e.preventDefault();
+		//axios put call
+		var uID = parseJWT(JWT).ID;
+		const response = await axios.put(Endpoint + "/users/lastName/" + uID, userLastName.lastName, axiosConfig);
+		console.log(response);
+		if(response.status === 200){
+			setUserLastName({lastName:''});
+			Submit();
+		}
+	}
+	const submitEmail = async (e) => {
+		console.log('submited');
+		console.log(userEmail);
+		e.preventDefault();
+		//axios put call
+		var uID = parseJWT(JWT).ID;
+		const response = await axios.put(Endpoint + "/users/email/" + uID, userEmail.email, axiosConfig);
+		console.log(response);
+		if(response.status === 200){
+			setUserLastName({email:''});
 			Submit();
 		}
 	}
@@ -75,28 +114,32 @@ function UserInfoChanger({JWT}){
 						</Col>
 					</Form.Group>
 				</Form>
-				<Form.Group as={Row} className="mb-3" controlId="formLastName">
-					<Form.Label column sm="3">
-						Last Name
-					</Form.Label>
-					<Col sm="9">
-						<Form.Control type="lastName" placeholder={userInput.lastName} />
-					</Col>
-					<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
-						Update
-					</Button>
-				</Form.Group>
-				<Form.Group as={Row} className="mb-3" controlId="formEmail">
-					<Form.Label column sm="3">
-						Email
-					</Form.Label>
-					<Col sm="9">
-						<Form.Control type="email" placeholder={userInput.email} />
-					</Col>
-					<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
-						Update
-					</Button>
-				</Form.Group>
+				<Form>
+					<Form.Group as={Row} className="mb-3" controlId="formLastName">
+						<Form.Label column sm="3">
+							Last Name
+						</Form.Label>
+						<Col sm="9">
+							<Form.Control type="lastName" placeholder={userInput.lastName} value={userLastName.lastName} onChange={(e)=> changeLastName(e)}/>
+						</Col>
+						<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
+							Update
+						</Button>
+					</Form.Group>
+				</Form>
+				<Form>
+					<Form.Group as={Row} className="mb-3" controlId="formEmail">
+						<Form.Label column sm="3">
+							Email
+						</Form.Label>
+						<Col sm="9">
+							<Form.Control type="email" placeholder={userInput.email} value={userEmail.email} onChange={(e)=> changeEmail(e)}/>
+						</Col>
+						<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
+							Update
+						</Button>
+					</Form.Group>
+				</Form>
 			</Container>
 		</>
 	)
