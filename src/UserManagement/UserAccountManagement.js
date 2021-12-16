@@ -13,7 +13,7 @@ import {
 	Form
 } from "react-bootstrap";
 import axios from "axios";
-import parseJWT from "./parseJWT";
+import parseJWT from "../parseJWT";
 
 const UserAccountManagement = ({JWT}) => {
 	const [userInput, setUserInput] = useState({

@@ -8,7 +8,7 @@ import {
 	Form
 } from "react-bootstrap";
 import axios from "axios";
-import parseJWT from "./parseJWT";
+import parseJWT from "../parseJWT";
 
 function UserInfoChanger({JWT}){
 	const [userInput, setUserInput] = useState({
