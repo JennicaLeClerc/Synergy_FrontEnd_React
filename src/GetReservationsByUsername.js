@@ -28,8 +28,7 @@ try {
   }
 }
 
-
-  const handleChange = (event) => {
+const handleChange = (event) => {
     updateFormValue({
       ...formValue,
       [event.target.name]: event.target.value
