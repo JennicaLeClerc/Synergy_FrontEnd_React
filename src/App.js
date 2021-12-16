@@ -189,7 +189,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/employee/ManagerPortal" element={<ManagerPortal JWT={JWT} />}/>			
 				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>		
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
-				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT={JWT}/>}/>
+				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT"={JWT}/>}/>
 				<Route exact path = "/employee/change_password" element={<PasswordChanger JWT={JWT}/>}/>													
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>

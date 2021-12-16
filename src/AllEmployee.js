@@ -45,14 +45,14 @@ const AllEmployee = ({JWT}) => {
                                     console.log(value)
                                     return (
                                         <>
-                                            {/* <tbody>
+                                            <tbody>
                                                 <tr>
-                                                    <td>{value.reservationID}</td>
-                                                    <td>{value.status}</td>
-                                                    <td>{value.startDate.substring(0, 10)}</td>
-                                                    <td>{value.endDate.substring(0, 10)}</td>
+                                                    <td>{value.id}</td>
+                                                    <td>{value.firstName}</td>
+                                                    <td>{value.lastName}</td>
+                                                    <td>{value.role}</td>
                                                 </tr>
-                                            </tbody> */}
+                                            </tbody>
                                         </>
                                     )
                                 })}
