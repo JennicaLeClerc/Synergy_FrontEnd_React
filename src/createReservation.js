@@ -1,5 +1,9 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
+import ReactDOM from 'react-dom';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './createReservation.css';
 import axios from 'axios';
 import parseJWT from "./parseJWT";
@@ -8,6 +12,7 @@ import { useNavigate } from 'react-router';
 
 const Reservation = ({JWT}) => {
   
+	let navigate = useNavigate;
 	let jsonPayLoad = parseJWT(JWT);
 	let userReserveID = parseInt(jsonPayLoad.ID);
 	let Navigate = useNavigate();
