@@ -7,8 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './createReservation.css';
 import axios from 'axios';
 import parseJWT from "./parseJWT";
-import { useNavigate } from 'react-router';
-
 
 const Reservation = ({JWT}) => {
   
