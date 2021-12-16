@@ -19,7 +19,6 @@ const EmployeeAccountManagement = ({JWT}) => {
 		password:'',
 		firstName:'',
 		lastName:'',
-		email:'',
 		employeeType: ''
 	});
 
@@ -33,7 +32,7 @@ const EmployeeAccountManagement = ({JWT}) => {
 		var eID = parseJWT(JWT).ID;
 		const response = await axios.get("http://localhost:5000/employee/" + eID, {headers:{"Authorization":"Bearer "+JWT}}).then(resp => resp);
 		console.log(response);
-		setEmployeeInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, email:response.data.email, employeeType:response.data.employeeType});
+		setEmployeeInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, employeeType:response.data.employeeType});
 	}
 
 	return(
@@ -73,14 +72,6 @@ const EmployeeAccountManagement = ({JWT}) => {
 							</Form.Label>
 							<Col sm="9">
 								<Form.Control  plaintext readOnly type="Last Name" placeholder={employeeInput.lastName} />
-							</Col>
-						</Form.Group>
-						<Form.Group as={Row} className="mb-3" controlId="formPlainEmail">
-							<Form.Label column sm="3" style = {{fontWeight:"bold"}}>
-								Email
-							</Form.Label>
-							<Col sm="9">
-								<Form.Control  plaintext readOnly type="Email" placeholder={employeeInput.email} />
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formPlainEmail">
