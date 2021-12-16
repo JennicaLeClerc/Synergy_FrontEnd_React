@@ -4,6 +4,7 @@ import {
 	Form
 } from "react-bootstrap";
 import axios from "axios";
+import Endpoint from "./Endpoint";
 
 const ManagerPortal = () => {
 	const [userIntput, setUserInput] = useState({

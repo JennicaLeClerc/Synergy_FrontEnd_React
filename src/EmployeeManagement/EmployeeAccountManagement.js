@@ -23,6 +23,7 @@ const EmployeeAccountManagement = ({JWT}) => {
 		employeeType: ''
 	});
 
+
 	useEffect(()=>{ Submit(); },[])
 	const Submit = async (e) => {		
 		var eID = parseJWT(JWT).ID;

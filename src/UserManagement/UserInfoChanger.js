@@ -90,7 +90,7 @@ function UserInfoChanger({JWT}){
 		const response = await axios.put(Endpoint + "/users/email/" + uID, userEmail.email, axiosConfig);
 		console.log(response);
 		if(response.status === 200){
-			setUserLastName({email:''});
+			setUserEmail({email:''});
 			Submit();
 		}
 	}
@@ -101,10 +101,11 @@ function UserInfoChanger({JWT}){
 			<Container>
 				<Form onSubmit={(e) => submitFirstName(e)}>
 					<Form.Group as={Row} className="mb-3" controlId="formFirstName" >
-						<Form.Label column sm="3">
+						<Col sm="3"></Col>
+						<Form.Label column sm="1">
 							First Name
 						</Form.Label>
-						<Col sm="6">
+						<Col sm="4">
 							<Form.Control name="firstName" placeholder={userInput.firstName} value={userFirstName.firstName} onChange={(e)=> changeFirstName(e)}/>
 						</Col>
 						<Col sm="3">
@@ -114,30 +115,36 @@ function UserInfoChanger({JWT}){
 						</Col>
 					</Form.Group>
 				</Form>
-				<Form>
+				<Form onSubmit={(e) => submitLastName(e)}>
 					<Form.Group as={Row} className="mb-3" controlId="formLastName">
-						<Form.Label column sm="3">
+						<Col sm="3"></Col>
+						<Form.Label column sm="1">
 							Last Name
 						</Form.Label>
-						<Col sm="9">
-							<Form.Control type="lastName" placeholder={userInput.lastName} value={userLastName.lastName} onChange={(e)=> changeLastName(e)}/>
+						<Col sm="4">
+							<Form.Control name="lastName" placeholder={userInput.lastName} value={userLastName.lastName} onChange={(e)=> changeLastName(e)}/>
 						</Col>
-						<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
-							Update
-						</Button>
+						<Col sm="3">
+							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
+								Update
+							</Button>
+						</Col>
 					</Form.Group>
 				</Form>
-				<Form>
+				<Form onSubmit={(e) => submitEmail(e)}>
 					<Form.Group as={Row} className="mb-3" controlId="formEmail">
-						<Form.Label column sm="3">
+						<Col sm="3"></Col>
+						<Form.Label column sm="1">
 							Email
 						</Form.Label>
-						<Col sm="9">
-							<Form.Control type="email" placeholder={userInput.email} value={userEmail.email} onChange={(e)=> changeEmail(e)}/>
+						<Col sm="4">
+							<Form.Control name="email" placeholder={userInput.email} value={userEmail.email} onChange={(e)=> changeEmail(e)}/>
 						</Col>
-						<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
-							Update
-						</Button>
+						<Col sm="3">
+							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
+								Update
+							</Button>
+						</Col>
 					</Form.Group>
 				</Form>
 			</Container>

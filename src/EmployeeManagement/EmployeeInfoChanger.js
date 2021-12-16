@@ -81,10 +81,11 @@ function EmployeeInfoChanger({JWT}){
 			<Container>
 				<Form onSubmit={(e) => submitFirstName(e)}>
 					<Form.Group as={Row} className="mb-3" controlId="formFirstName" >
-						<Form.Label column sm="3">
+						<Col sm="3"></Col>
+						<Form.Label column sm="1">
 							First Name
 						</Form.Label>
-						<Col sm="6">
+						<Col sm="4">
 							<Form.Control name="firstName" placeholder={employeeInput.firstName} value={employeeFirstName.firstName} onChange={(e)=> changeFirstName(e)}/>
 						</Col>
 						<Col sm="3">
@@ -94,17 +95,20 @@ function EmployeeInfoChanger({JWT}){
 						</Col>
 					</Form.Group>
 				</Form>
-				<Form>
+				<Form onSubmit={(e) => submitLastName(e)}>
 					<Form.Group as={Row} className="mb-3" controlId="formLastName">
-						<Form.Label column sm="3">
+						<Col sm="3"></Col>
+						<Form.Label column sm="1">
 							Last Name
 						</Form.Label>
-						<Col sm="9">
-							<Form.Control type="lastName" placeholder={employeeInput.lastName} value={employeeLastName.lastName} onChange={(e)=> changeLastName(e)}/>
+						<Col sm="4">
+							<Form.Control name="lastName" placeholder={employeeInput.lastName} value={employeeLastName.lastName} onChange={(e)=> changeLastName(e)}/>
 						</Col>
-						<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
-							Update
-						</Button>
+						<Col sm="3">
+							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
+								Update
+							</Button>
+						</Col>
 					</Form.Group>
 				</Form>
 			</Container>
