@@ -53,8 +53,8 @@ function EmployeeInfoChanger({JWT}){
 		console.log(employeeFirstName);
 		e.preventDefault();
 		//axios put call
-		var uID = parseJWT(JWT).ID;
-		const response = await axios.put(Endpoint + "/employee/firstName/" + uID, employeeFirstName.firstName, axiosConfig);
+		var eID = parseJWT(JWT).ID;
+		const response = await axios.put(Endpoint + "/employee/firstName/" + eID, employeeFirstName.firstName, axiosConfig);
 		console.log(response);
 		if(response.status === 200){
 			setEmployeeFirstName({firstName:''});
