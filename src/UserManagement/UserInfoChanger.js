@@ -48,7 +48,7 @@ function UserInfoChanger({JWT}){
 		console.log('submited')
 		e.preventDefault();
 		//axios post call
-		const response = await axios.post("http://localhost:5000/employee", userChanger.firstName);
+		const response = await axios.post(Endpoint + "/employee", userChanger.firstName);
 		console.log(response);
 	}
 
