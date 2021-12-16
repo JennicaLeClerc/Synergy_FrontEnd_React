@@ -6,11 +6,15 @@ import {
 	Col,
 	Form
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import parseJWT from "../parseJWT";
 import Endpoint from "../Endpoint";
 
 function UserInfoChanger({JWT}){
+	let navigate = useNavigate();
+
+	// Getting current info
 	const [userInput, setUserInput] = useState({
 		username:'',
 		password:'',
@@ -27,81 +31,72 @@ function UserInfoChanger({JWT}){
 		setUserInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, email:response.data.email});
 	}
 
-	const [userChanger, setUserChanger] = useState({
-		firstName: '',
-		lastName: '',
-		email: ''
+	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer "+JWT}};
+
+	const [userFirstName, setUserFirstName] = useState({
+		firstName:''
 	});
 
-	const { firstName, lastName, email } = userChanger;
-
-	const changePut = (e) => {
+	const changeFirstName = (e) => {
 		e.preventDefault();
-		setUserChanger({ ...userChanger, [e.target.name]: e.target.value });
+		setUserFirstName({ ...userFirstName, [e.target.name]: e.target.value });
 	}
 
-	const selectionPut = (e)=>{
-		setUserChanger({ ...userChanger});
-	}
-
-	const submitPut = async (e) => {
-		console.log('submited')
+	const submitFirstName = async (e) => {
+		console.log('submited');
+		console.log(userFirstName);
 		e.preventDefault();
 		//axios post call
-		const response = await axios.post(Endpoint + "/employee", userChanger.firstName);
+		var uID = parseJWT(JWT).ID;
+		const response = await axios.put(Endpoint + "/users/firstName/" + uID, userFirstName.firstName, axiosConfig);
 		console.log(response);
+		if(response.status === 200){
+			setUserFirstName({firstName:''});
+			Submit();
+		}
 	}
 
 	return(
 		<>
 			<br/><br/><br/>
 			<Container>
-				<Row>
-					<Col></Col>
-					<Col>
-						<Form.Group as={Row} className="mb-3" controlId="formFirstName">
-							<Form.Label column sm="3">
-								First Name
-							</Form.Label>
-							<Col sm="9">
-								<Form.Control type="firstName" placeholder={userInput.firstName} />
-							</Col>
-						</Form.Group>
-						<Form.Group as={Row} className="mb-3" controlId="formLastName">
-							<Form.Label column sm="3">
-								Last Name
-							</Form.Label>
-							<Col sm="9">
-								<Form.Control type="lastName" placeholder={userInput.lastName} />
-							</Col>
-						</Form.Group>
-						<Form.Group as={Row} className="mb-3" controlId="formEmail">
-							<Form.Label column sm="3">
-								Email
-							</Form.Label>
-							<Col sm="9">
-								<Form.Control type="email" placeholder={userInput.email} />
-							</Col>
-						</Form.Group>
+				<Form onSubmit={(e) => submitFirstName(e)}>
+					<Form.Group as={Row} className="mb-3" controlId="formFirstName" >
+						<Form.Label column sm="3">
+							First Name
+						</Form.Label>
+						<Col sm="6">
+							<Form.Control name="firstName" placeholder={userInput.firstName} value={userFirstName.firstName} onChange={(e)=> changeFirstName(e)}/>
+						</Col>
+						<Col sm="3">
+							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
+								Update
+							</Button>
+						</Col>
+					</Form.Group>
+				</Form>
+				<Form.Group as={Row} className="mb-3" controlId="formLastName">
+					<Form.Label column sm="3">
+						Last Name
+					</Form.Label>
+					<Col sm="9">
+						<Form.Control type="lastName" placeholder={userInput.lastName} />
 					</Col>
-					<Col>
-						<Row>
-							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
-								Update
-							</Button>
-						</Row>
-						<Row>
-							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
-								Update
-							</Button>
-						</Row>
-						<Row>
-							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
-								Update
-							</Button>
-						</Row>
+					<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
+						Update
+					</Button>
+				</Form.Group>
+				<Form.Group as={Row} className="mb-3" controlId="formEmail">
+					<Form.Label column sm="3">
+						Email
+					</Form.Label>
+					<Col sm="9">
+						<Form.Control type="email" placeholder={userInput.email} />
 					</Col>
-				</Row>
+					<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
+						Update
+					</Button>
+				</Form.Group>
 			</Container>
 		</>
 	)

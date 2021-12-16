@@ -20,21 +20,19 @@ export default function UserReservation({JWT}){
 		updateRes([...response.data.content])
 	}
 
-	
 	return (
 		<>
-		<br/>
-		<Container style={{width:"75%", height:"auto"}}>
-		<FullCalendar 
-		
-			plugins={[ dayGridPlugin ]}
-			initialView="dayGridMonth"
-			eventClick={(e)=>console.log(e)}
-			events={res.map((reserve)=>{return {title:reserve.status, start:reserve.startDate, end:reserve.endDate, color:colors[reserve.status]}})}
-		/>
-		
-		</Container>
+			<br/>
+			<Container style={{width:"75%", height:"auto"}}>
+			<FullCalendar 
+				plugins={[ dayGridPlugin ]}
+				initialView="dayGridMonth"
+				eventClick={(e)=>console.log(e)}
+				events={res.map((reserve)=>{return {title:reserve.status, start:reserve.startDate, end:reserve.endDate, color:colors[reserve.status]}})}
+			/>
+			
+			</Container>
 		</>
-		)
+	)
 		
 }

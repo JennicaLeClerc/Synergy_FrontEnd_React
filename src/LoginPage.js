@@ -75,5 +75,4 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 	)
 }
 
-
 export default LoginPage;
