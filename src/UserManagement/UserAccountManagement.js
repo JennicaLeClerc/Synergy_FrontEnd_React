@@ -23,11 +23,6 @@ const UserAccountManagement = ({JWT}) => {
 		email:''
 	});
 
-	const change = (e) => {
-		e.preventDefault();
-		setUserInput({...userInput, [e.target.name]: e.target.value, ['Content-type']: 'application/json'})
-	}
-
 	useEffect(()=>{ Submit(); },[])
 	const Submit = async (e) => {		
 		var uID = parseJWT(JWT).ID;
