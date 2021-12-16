@@ -67,8 +67,10 @@ const UserAccountManagement = () => {
 					</Col>
 					<Col>
 						<Row>
-							<Button className="mb-3" variant="outline-primary" size="sm" href='#' style={{width:"25%"}}>
-								Edit Info
+							<Button className="mb-3" size="sm"  style={{ backgroundColor: "#f26926", width:"25%"}}>
+								<Link to="/users/edit" style={{ textDecoration:"none"}}>
+									Edit Info
+								</Link>
 							</Button>
 						</Row>
 						<Row>

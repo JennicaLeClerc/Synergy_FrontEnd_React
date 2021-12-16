@@ -30,7 +30,6 @@ const LoginPage = ({JWT, updateJWT}) => {
 	const submit = async (e) => {
 		e.preventDefault();
 		
-
 		try{
 			const response = await axios.post("http://localhost:5000/authenticate", userInput).then(resp => resp);
 	
@@ -42,9 +41,6 @@ const LoginPage = ({JWT, updateJWT}) => {
 		} catch (e){
 			console.log(e)
 		}
-
-
-
 	}
 
 	return(

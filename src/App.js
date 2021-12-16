@@ -33,13 +33,8 @@ import LoginPage from './LoginPage';
 import ReservationsView from './ReservationView/ReservationsView';
 import parseJWT from './parseJWT';
 
-
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-
-
-
-
 
 function App() {
 	const [JWT,updateJWT] = useState("");
@@ -54,7 +49,6 @@ function App() {
 }
 
 // <ManagerPortal /> <RegisterUser /> works
-
 
 function GlobalNavBar({ JWT}){
 	let [currentDrop, updateCurrentDrop] = useState("none");
@@ -136,10 +130,10 @@ function ShowIfMatch(prop){
 	return(prop.cont)
 	return(<></>)
 }
+
 function GoHome(){
 	return(<Navigate to="/"/>)
 }
-
 
 function PageRouter({JWT, updateJWT}){
 	if (!JWT){ //DONE
