@@ -1,16 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import './createReservation.css';
 import axios from 'axios';
 import parseJWT from "./parseJWT";
+import { useNavigate } from 'react-router';
+
 
 const Reservation = ({JWT}) => {
   
 	let jsonPayLoad = parseJWT(JWT);
 	let userReserveID = parseInt(jsonPayLoad.ID);
+	let Navigate = useNavigate();
 
  	const [formValue, updateFormValue] = React.useState({
 		startDate: '',
@@ -39,7 +39,7 @@ const Reservation = ({JWT}) => {
 			const response = await axios.post("http://localhost:5000/reservations/save", formValue, axiosConfig);
 
 			if(response.status == 200){
-				navigate("/");
+				Navigate("/");
 			}
 		 }catch (e){
 			 console.log(e);
