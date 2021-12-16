@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import Endpoint from './Endpoint';
 
 const GetReservationByUsername = ()=> {
   
@@ -16,7 +17,7 @@ username: ''
 resFormData.append("User Name", formValue.username)
 
 try {
-    const response = await axios.get("http://localhost:5000/usernamer?username=resFormData", {params:{pageNumber: 0, pageSize: 10, sortBy:'reservationID'}})
+    const response = await axios.get(Endpoint + "/usernamer?username=resFormData", {params:{pageNumber: 0, pageSize: 10, sortBy:'reservationID'}})
     .then((response) =>{
     console.log(response);
     document.body.innerHTML = {response};
