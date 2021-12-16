@@ -6,11 +6,15 @@ import {
 	Col,
 	Form
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import parseJWT from "../parseJWT";
 import Endpoint from "../Endpoint";
 
 function UserInfoChanger({JWT}){
+	let navigate = useNavigate();
+
+	// Getting current info
 	const [userInput, setUserInput] = useState({
 		username:'',
 		password:'',
@@ -27,18 +31,16 @@ function UserInfoChanger({JWT}){
 		setUserInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, email:response.data.email});
 	}
 
+	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer "+JWT}};
+
 	const [userFirstName, setUserFirstName] = useState({
 		firstName:''
 	});
-
-	const { firstName } = userFirstName;
 
 	const changeFirstName = (e) => {
 		e.preventDefault();
 		setUserFirstName({ ...userFirstName, [e.target.name]: e.target.value });
 	}
-
-	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer "+JWT}};
 
 	const submitFirstName = async (e) => {
 		console.log('submited');
@@ -46,8 +48,12 @@ function UserInfoChanger({JWT}){
 		e.preventDefault();
 		//axios post call
 		var uID = parseJWT(JWT).ID;
-		const response = await axios.put(Endpoint + "/users/firstName/" + uID, userFirstName.firstName.replace(/['"]+/g, ''), axiosConfig);
+		const response = await axios.put(Endpoint + "/users/firstName/" + uID, userFirstName.firstName, axiosConfig);
 		console.log(response);
+		if(response.status === 200){
+			setUserFirstName({firstName:''});
+			Submit();
+		}
 	}
 
 	return(
