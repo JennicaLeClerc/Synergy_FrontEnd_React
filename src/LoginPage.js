@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
     Button,
     Container,
-    Form,
-    FormCheck,
 	Row,
 	Col
 } from "react-bootstrap";
