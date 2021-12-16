@@ -32,9 +32,9 @@ import UserInfoChanger from './UserInfoChanger';
 import LoginPage from './LoginPage';
 import ReservationsView from './ReservationView/ReservationsView';
 import parseJWT from './parseJWT';
-
-import FullCalendar from '@fullcalendar/react' // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import CreateReservation from './createReservation';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import UserReservation from './UserReservation';
 
 function App() {
@@ -99,7 +99,7 @@ function NavbarS1(props){
 			return(
 				<>
 					<Button className="hov" onClick ={()=>{props.update((props.sel==1)? 0:1)}} >Reservation</Button>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>New Reservation</Link>}/>							
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/users/reservation/add" className="hov" style={{ paddingLeft: "15%"}}>New Reservation</Link>}/>							
 					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/users/reservation" className="hov" style={{ paddingLeft: "15%"}}>My Reservations</Link>}/>							
 					<Button className="hov" onClick ={()=>{props.update((props.sel==2)? 0:2)}} >Account</Button>																
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
@@ -165,7 +165,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/" element={<MainPage JWT={JWT}/>}/>										{/*Done 	*/}
 				<Route exact path = "/users/register" element={<RegisterUser JWT={JWT}/>}/>						{/*Done 	*/}
 				<Route exact path = "/users" element={<UserAccountManagement JWT={JWT}/>}/>						
-				{/*<Route exact path = "/users/reservation/add" element={< JWT={JWT}/>}/>									*/}
+				<Route exact path = "/users/reservation/add" element={<CreateReservation JWT={JWT}/>}/>			{/*			*/}
 				<Route exact path = "/users/reservation" element={<UserReservation JWT={JWT}/>}/>
 				<Route exact path = "/users/edit" element={<UserInfoChanger JWT={JWT}/>}/>						
 				<Route exact path = "/users/change_password" element={<PasswordChanger JWT={JWT}/>}/>			
