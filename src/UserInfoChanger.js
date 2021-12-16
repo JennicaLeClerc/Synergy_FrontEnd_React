@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { 
 	Button, 
 	Container,
@@ -8,8 +8,56 @@ import {
 	Form
 } from "react-bootstrap";
 import axios from "axios";
+import parseJWT from "./parseJWT";
 
-function UserInfoChanger(){
+function UserInfoChanger({JWT}){
+	const [userInput, setUserInput] = useState({
+		username:'',
+		password:'',
+		firstName:'',
+		lastName:'',
+		email:''
+	});
+
+	const change = (e) => {
+		e.preventDefault();
+		setUserInput({...userInput, [e.target.name]: e.target.value, ['Content-type']: 'application/json'})
+	}
+
+	useEffect(()=>{ Submit(); },[])
+	const Submit = async (e) => {		
+		var uID = parseJWT(JWT).ID;
+		const response = await axios.get("http://localhost:5000/users/" + uID, {headers:{"Authorization":"Bearer "+JWT}}).then(resp => resp);
+		console.log(response);
+		setUserInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, email:response.data.email});
+	}
+
+	const [userChanger, setUserChanger] = useState({
+		firstName: '',
+		lastName: '',
+		email: ''
+	});
+
+	const { firstName, lastName, email } = userChanger;
+
+	const changePut = (e) => {
+		e.preventDefault();
+		setUserChanger({ ...userChanger, [e.target.name]: e.target.value });
+	}
+
+	const selectionPut = (e)=>{
+		setUserChanger({ ...userChanger});
+	}
+
+	const submitPut = async (e) => {
+		console.log('submited')
+		e.preventDefault();
+		//axios post call
+		const response = await axios.post("http://localhost:5000/employee", userChanger.firstName);
+		console.log(response);
+	}
+
+
 	return(
 		<>
 			<br/><br/><br/>
@@ -22,7 +70,7 @@ function UserInfoChanger(){
 								First Name
 							</Form.Label>
 							<Col sm="9">
-								<Form.Control type="firstName" placeholder="Current First Name" />
+								<Form.Control type="firstName" placeholder={userInput.firstName} />
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formLastName">
@@ -30,7 +78,7 @@ function UserInfoChanger(){
 								Last Name
 							</Form.Label>
 							<Col sm="9">
-								<Form.Control type="lastName" placeholder="Current Last Name" />
+								<Form.Control type="lastName" placeholder={userInput.lastName} />
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formEmail">
@@ -38,22 +86,27 @@ function UserInfoChanger(){
 								Email
 							</Form.Label>
 							<Col sm="9">
-								<Form.Control type="email" placeholder="email@email.com" />
+								<Form.Control type="email" placeholder={userInput.email} />
 							</Col>
 						</Form.Group>
 					</Col>
-					<Col></Col>
-				</Row>
-			</Container>
-			<Container>
-				<Row>
-					<Col></Col>
-					<Col className = "text-center">
-						<Button className = "center" size="sm" href='#'>
-							Login
-						</Button>
+					<Col>
+						<Row>
+							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
+								Update
+							</Button>
+						</Row>
+						<Row>
+							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
+								Update
+							</Button>
+						</Row>
+						<Row>
+							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}}>
+								Update
+							</Button>
+						</Row>
 					</Col>
-					<Col></Col>
 				</Row>
 			</Container>
 		</>
