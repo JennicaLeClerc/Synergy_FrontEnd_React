@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
 	BrowserRouter as Router,
-	Route,
-	Routes,
 	Link
 } from "react-router-dom";
 import { 
@@ -97,12 +95,16 @@ const EmployeeAccountManagement = ({JWT}) => {
 					<Col>
 						<Row>
 							<Button className="mb-3" size="sm"  style={{backgroundColor: "#f26926", width:"25%"}}>
-								Edit Info
+								<Link to="/employee/edit" style={{color:"white", textDecoration:"none"}}>
+									Edit Info
+								</Link>
 							</Button>
 						</Row>
 						<Row>
 							<Button className="mb-3" variant="outline-primary" size="sm" style={{backgroundColor: "#f26926", width:"40%"}}>
-								Change Password
+								<Link to="/employee/change_password" style={{color:"white", textDecoration:"none"}}>
+									Change Password
+								</Link>
 							</Button>
 						</Row>
 					</Col>
@@ -113,5 +115,4 @@ const EmployeeAccountManagement = ({JWT}) => {
 }
 
 
-
-export default UserAccountManagement;
+export default EmployeeAccountManagement;
