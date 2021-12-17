@@ -1,0 +1,90 @@
+.WeatherForm{
+    justify-content: center;
+    display: flex;
+    padding-bottom: 5px;
+    
+    }
+    .WeatherForm> input{
+        font-size: 17px;
+        size:18px;
+        text-align:center;
+        }
+    
+    .weatherbtn {
+        font-size:19px;
+        background-color:#f26926;
+        color:white;
+        padding:10px;
+        margin-left:15px;
+        border:none;
+        
+      }
+      
+    .weatherbtn:hover {
+        background-color:greenyellow; 
+        color: white;
+      }
+    
+    .winfo{
+        margin-top: 6px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 30px;
+        text-align: center;
+    }
+    .weather{
+        border-radius: 10px;
+        margin: 10px;
+        width: 75%;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        border: 1px solid rgb(8, 8, 8);
+        padding: 20px;
+        box-shadow: 10px 10px 5px #aaaaaa;
+        background-color: rgb(158, 166, 167);
+    }
+    
+    .weathhead{
+        padding: 8px;
+        font-weight: 800;
+        box-shadow: inset 1px 1px 15px rgb(90, 88, 88);
+        font-size: 35px;
+        background-color: black;
+        text-align: center;
+        color:white;
+    }
+    .weatherWrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+         
+    }
+    
+    .Weath{
+     display: inline;
+     text-align: center;
+     justify-content: center;
+    
+    }
+    
+    .welement{
+        justify-content: center;
+        text-align: center;
+        padding-bottom: 13px ;
+        font-size: 25px;
+        display: flex;
+    }
+    
+    .centerHeading {
+        margin: auto;
+        width:20%;
+        
+      
+      }
+    
+      .weatherPic {
+        padding: 25px;
+        background-image: url("https://i.postimg.cc/x1x81ghn/wlogo.jpg");
+        background-repeat: no-repeat;
+        background-size: 340px 70px;
+        margin-bottom:20px;
+      }
+      .header4{margin-top:45px;}

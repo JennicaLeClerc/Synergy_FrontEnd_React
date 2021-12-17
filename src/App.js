@@ -28,8 +28,10 @@ import ManagerPortal from './ManagerPortal';
 import RegisterUser from './RegisterUser';
 import UserAccountManagement from './UserManagement/UserAccountManagement';
 import UserInfoChanger from './UserManagement/UserInfoChanger';
+import UserPasswordChanger from './UserManagement/UserPasswordChanger';
 import EmployeeAccountManagement from './EmployeeManagement/EmployeeAccountManagement';
-import PasswordChanger from './PasswordChanger';
+import EmployeeInfoChanger from './EmployeeManagement/EmployeeInfoChanger';
+import EmployeePasswordChanger from './EmployeeManagement/EmployeePasswordChanger';
 import LoginPage from './LoginPage';
 import ReservationsView from './ReservationView/ReservationsView';
 import parseJWT from './parseJWT';
@@ -112,10 +114,10 @@ function NavbarS1(props){
 			return(
 				<>
 					<Button className="hov" onClick ={()=>{props.update((props.sel===1)? 0:1)}} >Reservations</Button>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/> 
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
-					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Pending</Link>}/> 
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Upcoming</Link>}/>
+					<ShowIfMatch in={props.sel} given={1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>Current</Link>}/>
+					<ShowIfMatch in={props.sel} given = {1} cont={<Link to="/employee/reservations" className="hov" style={{ paddingLeft: "15%"}}>All</Link>}/>
 					<Button className="hov" onClick ={()=>{props.update((props.sel==2)? 0:2)}} >Account</Button>																
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee/edit" className="hov" style={{ paddingLeft: "15%"}}>Change Info</Link>}/>					
@@ -163,8 +165,8 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/users" element={<UserAccountManagement JWT={JWT}/>}/>						{/*Done 	*/}
 				<Route exact path = "/users/reservation/add" element={<CreateReservation JWT={JWT}/>}/>			{/*			*/}
 				<Route exact path = "/users/reservation" element={<UserReservation JWT={JWT}/>}/>
-				<Route exact path = "/users/edit" element={<UserInfoChanger JWT={JWT}/>}/>						
-				<Route exact path = "/users/change_password" element={<PasswordChanger JWT={JWT}/>}/>			
+				<Route exact path = "/users/edit" element={<UserInfoChanger JWT={JWT}/>}/>						{/*Done 	*/}
+				<Route exact path = "/users/change_password" element={<UserPasswordChanger JWT={JWT}/>}/>		{/*Done 	*/}
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done 	*/}
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done 	*/}
 			</Routes>
@@ -177,7 +179,8 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>			
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
 				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT={JWT}/>}/>				{/*Done */}
-				<Route exact path = "/employee/change_password" element={<PasswordChanger JWT={JWT}/>}/>								
+				<Route exact path = "/employee/edit" element={<EmployeeInfoChanger JWT={JWT}/>}/>				{/*Done */}
+				<Route exact path = "/employee/change_password" element={<EmployeePasswordChanger JWT={JWT}/>}/>{/*Done */}
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>
 		)
@@ -190,7 +193,8 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/employee/reservations" element={<ReservationsView  JWT={JWT}/>}/>		
 				<Route exact path = "/authenticate" element={<LoginPage JWT={JWT} updateJWT={updateJWT} />}/>	{/*Done */}
 				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT={JWT}/>}/>				{/*Done */}
-				<Route exact path = "/employee/change_password" element={<PasswordChanger JWT={JWT}/>}/>													
+				<Route exact path = "/employee/edit" element={<EmployeeInfoChanger JWT={JWT}/>}/>				{/*Done */}
+				<Route exact path = "/employee/change_password" element={<EmployeePasswordChanger JWT={JWT}/>}/>{/*Done */}
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>
 		)

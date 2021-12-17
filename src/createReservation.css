@@ -1,4 +1,4 @@
-input[type=text], select {
+.textSelect {
     width: 200px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -6,19 +6,9 @@ input[type=text], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-  }
-  input[type=password], select {
-    width: 200px;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  input[type=submit] {
-    width: 200px;
+}
+.submitClass{
+      width: 200px;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -26,12 +16,9 @@ input[type=text], select {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  input[type=submit]{
-    background-color: #f26926;
+     background-color: #f26926;
     margin-left:15px;
-  }
+}
   
   .resForm {
    width:500px;
@@ -39,5 +26,6 @@ input[type=text], select {
     padding:75px;
     margin-left:450px;
   }
-  label{padding-right:15px;}
+
+  .labelClass{padding-right:15px;}
   
