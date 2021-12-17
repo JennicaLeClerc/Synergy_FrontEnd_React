@@ -52,7 +52,7 @@ const EmployeeAccountManagement = ({JWT}) => {
 								Password
 							</Form.Label>
 							<Col sm="9">
-								<Form.Control  plaintext readOnly type="password" placeholder="****************" />
+								<Form.Control  plaintext readOnly type="password" placeholder={'\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'} />
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formPlainFirstName">

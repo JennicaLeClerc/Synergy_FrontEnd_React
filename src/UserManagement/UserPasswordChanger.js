@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link } from "react-router-dom";
 import { 
 	Button, 
 	Container,
@@ -55,18 +56,24 @@ function UserPasswordChanger({JWT}){
 							<FloatingLabel controlId="floatingInput" label="Username" className="mb-3">
 								<Form.Control name="username" placeholder="Username" value={userInput.username} onChange={(e)=> changePassword(e)} required/>
 							</FloatingLabel>
-							<FloatingLabel controlId="floatingPassword" label="Old Password" className="mb-3">
-								<Form.Control name="old" placeholder="Old Password" value={userInput.old} onChange={(e)=> changePassword(e)} required/>
+							<FloatingLabel controlId="floatingPasswordOld" label="Old Password" className="mb-3">
+								<Form.Control name="old" type="password" placeholder="Old Password" value={userInput.old} onChange={(e)=> changePassword(e)} required/>
 							</FloatingLabel>
-							<FloatingLabel controlId="floatingPassword" label="New Password" className="mb-3">
-								<Form.Control name="new" placeholder="New Password" value={userInput.new} onChange={(e)=> changePassword(e)} required/>
+							<FloatingLabel controlId="floatingPasswordNew" label="New Password" className="mb-3">
+								<Form.Control name="new" type="password" placeholder="New Password" value={userInput.new} onChange={(e)=> changePassword(e)} required/>
 							</FloatingLabel>
-							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"25%"}} type="submit" value="Submit">
+							<Button className="mb-3" style={{backgroundColor: "#f26926", width:"40%"}} type="submit" value="Submit">
 								Submit
 							</Button>
 						</Form>
 					</Col>
-					<Col></Col>
+					<Col className = "text-center">
+						<Button className="mb-3" size="sm"  style={{backgroundColor: "#f26926", width:"25%"}}>
+							<Link to="/users" style={{color:"white", textDecoration:"none"}}>
+								Back
+							</Link>
+						</Button>
+					</Col>
 				</Row>
 			</Container>
 		</>

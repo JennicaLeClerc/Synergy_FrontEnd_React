@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { 
 	Button, 
 	Container,
@@ -111,6 +112,17 @@ function EmployeeInfoChanger({JWT}){
 						</Col>
 					</Form.Group>
 				</Form>
+				<Row>
+					<Col></Col>
+					<Col className = "text-center">
+						<Button className="mb-3" size="sm"  style={{backgroundColor: "#f26926", width:"25%"}}>
+							<Link to="/users" style={{color:"white", textDecoration:"none"}}>
+								Back
+							</Link>
+						</Button>
+					</Col>
+					<Col></Col>
+				</Row>
 			</Container>
 		</>
 	)
