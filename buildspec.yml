@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+   
+    commands:
+        # install npm
+        - npm install
+       
+  build:
+    commands:
+        # run build script
+        - npm run-script build
+        - mkdir ./views
+        - cp -rf ./build/* ./views
+artifacts:
+  files:
+    - './views/**/*'
+    discard-paths: yes
+
