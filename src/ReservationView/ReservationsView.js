@@ -20,7 +20,7 @@ const ReservationsView = ({JWT}) => {
 
     const showPending = async (e) => {
         e.preventDefault();
-        const response = await axios.get(url + "/status/pending", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 10, sortBy:'reservationID'}}).then(
+        const response = await axios.get(url + "/status/pending", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 20, sortBy:'reservationID'}}).then(
             (data)=> data.data
         )
         setShow({ ...show, all:false, upcoming: false, current: false, pending: true })     
@@ -31,7 +31,7 @@ const ReservationsView = ({JWT}) => {
 
     const showUpcoming = async (e) => {
         e.preventDefault();
-        const response = await axios.get(url + "/start", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 10, sortBy: 'reservationID' } }).then(
+        const response = await axios.get(url + "/start", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 20, sortBy: 'reservationID' } }).then(
             (data) => data.data
         );
         setShow({ ...show, all: false, upcoming: true, current: false, pending: false })
@@ -42,7 +42,7 @@ const ReservationsView = ({JWT}) => {
 
     const showCurrent = async (e) => {
         e.preventDefault();
-        const response = await axios.get(url + "/startend", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 10, sortBy: 'reservationID' } }).then(
+        const response = await axios.get(url + "/startend", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 20, sortBy: 'reservationID' } }).then(
             (data) => data.data
         )
         setShow({ ...show, all: false, upcoming: false, current: true, pending: false })
@@ -52,12 +52,10 @@ const ReservationsView = ({JWT}) => {
 
     const allReservations = async () => {
         
-        const response = await axios.get(url + "/all", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 10, sortBy: 'reservationID' } }).then(
+        const response = await axios.get(url + "/all", { headers: { "Authorization": `Bearer ${JWT}` }, params: { pageNumber: 0, pageSize: 20, sortBy: 'reservationID' } }).then(
             (data) => data.data
         )
         setShow({ ...show, all: true, upcoming: false, current: false, pending: false })
-        console.log('hit2')
-        console.log(response.content)
         setProps(response.content);
     }
 
@@ -76,7 +74,10 @@ const ReservationsView = ({JWT}) => {
                 Reservations
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item name="pending" onClick={(e) => showPending(e)}> Pending Reservations</Dropdown.Item>
+                    <Dropdown.Item name="pending" onClick={(e) => {
+
+                        showPending(e)
+                        }}> Pending Reservations</Dropdown.Item>
                     <Dropdown.Item name="upcoming" onClick={(e) => showUpcoming(e)}>Upcoming Reservations</Dropdown.Item>
                     <Dropdown.Item name="current" onClick={(e) => showCurrent(e)}>Current Reservations</Dropdown.Item>
                 </Dropdown.Menu>
@@ -90,14 +91,14 @@ const ReservationsView = ({JWT}) => {
                                 <thead >
                                     <tr>
                                         <th >Reservation ID</th>
-                                        <th> Staus </th>
+                                        <th> Status </th>
                                         <th >Start Date</th>
                                         <th >End Date</th>
                                     </tr>
                                 </thead>
                                 {props.map((value) => {
                                     return (
-                                        <Reservations props={value} />
+                                        <Reservations props={{value,  jwt: JWT }} />
                                     )
                                 })}
                             </Table>
@@ -110,14 +111,16 @@ const ReservationsView = ({JWT}) => {
                            <thead >
                                <tr>
                                    <th >Reservation ID</th>
-                                   <th> Staus </th>
+                                   <th> Status </th>
                                    <th >Start Date</th>
                                    <th >End Date</th>
+                                   <th >Modify</th>
+
                                </tr>
                            </thead>
                                 {props.map((value) => {
                                     return (
-                            <Reservations props={value} />
+                            <Reservations props={{value, jwt: JWT, pending: true}} />
                                     )})}
                        </Table>
                         </>
@@ -129,14 +132,14 @@ const ReservationsView = ({JWT}) => {
                                 <thead >
                                     <tr>
                                         <th >Reservation ID</th>
-                                        <th> Staus </th>
+                                        <th> Status </th>
                                         <th >Start Date</th>
                                         <th >End Date</th>
                                     </tr>
                                 </thead>
                                 {props.map((value) => {
                                     return (
-                                        <Reservations props={value} />
+                                        <Reservations props={{ value, jwt: JWT }} />
                                     );
                                 })}
                             </Table>
@@ -149,14 +152,15 @@ const ReservationsView = ({JWT}) => {
                                 <thead >
                                     <tr>
                                         <th >Reservation ID</th>
-                                        <th> Staus </th>
+                                        <th> Status </th>
                                         <th >Start Date</th>
                                         <th >End Date</th>
+                                        
                                     </tr>
                                 </thead>
                                 {props.map((value) => {
                                     return (
-                                        <Reservations props={value} />
+                                        <Reservations props={{ value, jwt: JWT }}/>
                                     );
                                 })}
                             </Table>
