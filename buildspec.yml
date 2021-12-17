@@ -16,4 +16,7 @@ phases:
         - mkdir ./views
         - cp -rf ./build/* ./views
 artifacts:
-    - views
+  files:
+    - './views/**/*'
+    discard-paths: yes
+
