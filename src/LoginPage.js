@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import {
-    Button,
-    Container,
-    Form,
-    FormCheck,
+	Button,
+	Container,
+	Form,
+	FormCheck,
 	Row,
 	Col
 } from "react-bootstrap";
@@ -46,32 +46,32 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 
 	return(
 		<>
-		<br/><br/><br/>
-		<Container>
-			<Row>
-				<Col></Col>
-				<Col md="auto" className = "text-center">
-					<form id="login-form" onSubmit={(e) => submit(e)}>
-						<input type="text" name="username" id="username-field" className="login-form-field" placeholder="Username" onChange={(e)=> change(e)} required/>
-						<br/><br/>
-						<input type="password" name="password" id="password-field" className="login-form-field" placeholder="Password" onChange={(e)=> change(e)} required/>
-						<br/><br/>
-						<Button style={{ backgroundColor: "#f26926"}} type="submit" value="Submit" >Submit</Button>
-						<br/><br/>
-						<p id="forgot-password" align="center"><a href="#">Forgot Password?</a></p>
-					</form>
-				</Col>
-				<Col></Col>
-			</Row>
-		</Container>
-		<div className="row">
-			<div className="col-sm-4"></div>
-			<div className="hide1" id = "error">
-				<p align="center">*Username or Password are Incorrect*</p>
+			<br/><br/><br/>
+			<Container>
+				<Row>
+					<Col></Col>
+					<Col md="auto" className = "text-center">
+						<form id="login-form" onSubmit={(e) => submit(e)}>
+							<input type="text" name="username" id="username-field" className="login-form-field" placeholder="Username" onChange={(e)=> change(e)} required/>
+							<br/><br/>
+							<input type="password" name="password" id="password-field" className="login-form-field" placeholder="Password" onChange={(e)=> change(e)} required/>
+							<br/><br/>
+							<Button style={{ backgroundColor: "#f26926"}} type="submit" value="Submit" >Submit</Button>
+							<br/><br/>
+							<p id="forgot-password" align="center"><a href="#">Forgot Password?</a></p>
+						</form>
+					</Col>
+					<Col></Col>
+				</Row>
+			</Container>
+			<div className="row">
+				<div className="col-sm-4"></div>
+				<div className="hide1" id = "error">
+					<p align="center">*Username or Password are Incorrect*</p>
+				</div>
+				<div className="col-sm-4"></div>
 			</div>
-			<div className="col-sm-4"></div>
-		</div>
-	</>
+		</>
 	)
 }
 

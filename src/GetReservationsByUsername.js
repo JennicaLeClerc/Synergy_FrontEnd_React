@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { 
+	Form,
+	Button
+} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Endpoint from './Endpoint';
@@ -9,7 +11,7 @@ import Endpoint from './Endpoint';
 const GetReservationByUsername = ()=> {
 	
 	const [formValue, updateFormValue] = React.useState({
-	username: ''
+		username: ''
 	});
 
 	const handleSubmit = async() => {

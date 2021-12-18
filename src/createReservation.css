@@ -1,31 +1,31 @@
 .textSelect {
-    width: 200px;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+	width: 200px;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
-.submitClass{
-      width: 200px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-     background-color: #f26926;
-    margin-left:15px;
-}
-  
-  .resForm {
-   width:500px;
-    background-color: #f2f2f2;
-    padding:75px;
-    margin-left:450px;
-  }
 
-  .labelClass{padding-right:15px;}
+.submitClass{
+	  width: 200px;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	 background-color: #f26926;
+	margin-left:15px;
+}
   
+.resForm {
+   	width:500px;
+	background-color: #f2f2f2;
+	padding:75px;
+	margin-left:450px;
+}
+
+.labelClass{padding-right:15px;} 

@@ -23,11 +23,10 @@ const EmployeeAccountManagement = ({JWT}) => {
 		employeeType: ''
 	});
 
-
 	useEffect(()=>{ Submit(); },[])
 	const Submit = async (e) => {		
 		var eID = parseJWT(JWT).ID;
-		const response = await axios.get(Endpoint + "/employee/" + eID, {headers:{"Authorization":"Bearer "+JWT}}).then(resp => resp);
+		const response = await axios.get(Endpoint + "/employee/" + eID, {headers:{"Authorization":"Bearer " + JWT}}).then(resp => resp);
 		console.log(response);
 		setEmployeeInput({username:response.data.username, password:response.data.password, firstName:response.data.firstName, lastName:response.data.lastName, employeeType:response.data.employeeType});
 	}
@@ -44,7 +43,7 @@ const EmployeeAccountManagement = ({JWT}) => {
 								Username
 							</Form.Label>
 							<Col sm="9">
-							<	Form.Control  plaintext readOnly type="username" placeholder={employeeInput.username} />
+								<Form.Control  plaintext readOnly type="username" placeholder={employeeInput.username} />
 							</Col>
 						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formPlainPassword">
@@ -101,6 +100,5 @@ const EmployeeAccountManagement = ({JWT}) => {
 		</>
 	)
 }
-
 
 export default EmployeeAccountManagement;

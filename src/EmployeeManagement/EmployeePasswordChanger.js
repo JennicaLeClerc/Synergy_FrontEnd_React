@@ -16,14 +16,14 @@ import parseJWT from "../parseJWT";
 
 function EmployeePasswordChanger({JWT}){
 
+	// Updating employeeInfo
 	const [employeeInput, setEmployeeInput] = useState({
 		username:'',
 		new:'',
 		old:''
 	});
 
-	// Updating employeeInfo
-	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer "+JWT}};
+	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer " + JWT}};
 
 	const changePassword = (e) => {
 		e.preventDefault();

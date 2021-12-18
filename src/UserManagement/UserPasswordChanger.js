@@ -23,7 +23,7 @@ function UserPasswordChanger({JWT}){
 	});
 
 	// Updating userInfo
-	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer "+JWT}};
+	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer " + JWT}};
 
 	const changePassword = (e) => {
 		e.preventDefault();

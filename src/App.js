@@ -298,9 +298,6 @@ function Footer(){
 	)
 }
 
-
-
-
 function MainPage(){
 	return(
 		<>
