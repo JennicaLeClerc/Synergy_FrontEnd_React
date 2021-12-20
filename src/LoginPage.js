@@ -5,7 +5,8 @@ import {
 	Form,
 	FormCheck,
 	Row,
-	Col
+	Col,
+	Alert
 } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -64,13 +65,6 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 					<Col></Col>
 				</Row>
 			</Container>
-			<div className="row">
-				<div className="col-sm-4"></div>
-				<div className="hide1" id = "error">
-					<p align="center">*Username or Password are Incorrect*</p>
-				</div>
-				<div className="col-sm-4"></div>
-			</div>
 		</>
 	)
 }

@@ -55,7 +55,7 @@ function App() {
 }
 
 // <ManagerPortal /> <RegisterUser /> works
-function GlobalNavBar({ JWT}){
+function GlobalNavBar({JWT}){
 	let [currentDrop, updateCurrentDrop] = useState("none");
 	return(
 		<Navbar bg="dark" variant='dark' expand={false}>
@@ -338,40 +338,6 @@ function MainPage(){
 					<Carousel.Caption></Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>
-		</>
-	)
-}
-
-function UserLogin(){
-	return(
-		<>
-			<br/><br/><br/>
-			<Container>
-				<Row>
-					<Col></Col>
-					<Col md="auto" className = "text-center">
-						<form id="login-form">
-							<input type="text" name="username" id="username-field" className="login-form-field" placeholder="Username" />
-							<br/><br/>
-							<input type="password" name="password" id="password-field" className="login-form-field" placeholder="Password" />
-							<br/><br/>
-							<Button>
-								Login
-							</Button>
-							<br/><br/>
-							<p id="forgot-password" align="center"><a href="#">Forgot Password?</a></p>
-						</form>
-					</Col>
-					<Col></Col>
-				</Row>
-			</Container>
-			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="hide1" id = "error">
-					<p align="center">*Username or Password are Incorrect*</p>
-				</div>
-				<div class="col-sm-4"></div>
-			</div>
 		</>
 	)
 }
