@@ -1,31 +1,42 @@
-.textSelect {
-	width: 200px;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
+.elem{
+	margin: 20px 0;
 }
 
-.submitClass{
-	  width: 200px;
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	 background-color: #f26926;
-	margin-left:15px;
-}
-  
-.resForm {
-   	width:500px;
-	background-color: #f2f2f2;
-	padding:75px;
-	margin-left:450px;
+label {
+    display: block;
+    font-family: 'Nanum Gothic';
+    padding-bottom: 10px;
+    font-size: 1.25em;
+  }
+
+.dateElem{
+	width: 49%;
+    display: inline-block;
+    float: left;
+    margin-left: 1%;
 }
 
-.labelClass{padding-right:15px;} 
+.checkdates{
+	width: 95%;
+    display: inline-block;
+}
+
+.reserveBody {
+    width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+  }
+
+input, select, textarea {
+    border-radius: 2px;
+    border: 2px solid #777;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    font-family: 'Nanum Gothic';
+    width: 100%;
+    padding: 10px;
+  }
+
+  textarea {
+    height: 250px;
+  }
