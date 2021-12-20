@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {useState} from "react";import ReactDOM from 'react-dom';
 import { 
 	Form,
 	Button,
@@ -55,7 +54,7 @@ const Reservation = ({JWT}) => {
 			body.startDate = new Date(userInput.startDate);
 			body.endDate = new Date(userInput.endDate);
 
-			const response = await axios.post("http://localhost:5000/reservations/save", body, axiosConfig);
+			const response = await axios.post(Endpoint + "/reservations/save", body, axiosConfig);
 	
 			console.log(response);
 			if(response.status == 200){
