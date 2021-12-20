@@ -17,11 +17,14 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 		password:'',
 		role:userType
 	});
+	const [error, setError] = useState(false);
+	const [success, setSucccess] = useState(false);
 
 	let navigate = useNavigate();
 	const{Username, Password} = userInput;
 
 	const change = (e) => {
+		setError(false)
 		e.preventDefault();
 		setUserInput({...userInput, [e.target.name]: e.target.value, ['Content-type']: 'application/json'})
 	}
@@ -36,9 +39,12 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 			if(response.status == 200){
 				updateJWT(response.data.jwt)
 				navigate("/");
+			} else {
+				setError(true)
 			}
 		} catch (e){
-			console.log(e)
+			console.log(e);
+			setError(true)
 		}
 	}
 
@@ -60,8 +66,17 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 						</form>
 					</Col>
 					<Col></Col>
+					
 				</Row>
+				
 			</Container>
+			<div style={{textAlign: 'center', color:'red'}}>
+				<br></br>
+			{error ?
+				<h3>The credentails are incorrect, try again!</h3>
+				: ''}
+			</div>
+			
 		</>
 	)
 }
