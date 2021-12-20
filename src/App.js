@@ -14,15 +14,10 @@ import {
 	Carousel,
 	Container,
 	Navbar,
-	NavDropdown,
 	Offcanvas,
-	Nav,
-	Form,
 	Button,
-	FormControl,
 	Row,
-	Col,
-	Accordion
+	Col
 } from 'react-bootstrap';
 import ManagerPortal from './ManagerPortal';
 import RegisterUser from './RegisterUser';
@@ -38,9 +33,6 @@ import parseJWT from './parseJWT';
 import CreateReservation from './createReservation';
 import UserReservation from './UserReservation';
 import AllEmployee from './AllEmployee';
-
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
 
 function App() {
 	const [JWT,updateJWT] = useState("");

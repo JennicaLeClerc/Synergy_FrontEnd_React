@@ -1,7 +1,5 @@
 import React from 'react';
-// import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
-// import './updateReservation.css';
 import Endpoint from './Endpoint';
 
 const UpdateReservation = ()=> {

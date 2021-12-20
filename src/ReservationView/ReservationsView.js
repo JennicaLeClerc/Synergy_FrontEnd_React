@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Dropdown } from "react-bootstrap";
+import {
+	Dropdown,
+	Table
+} from "react-bootstrap";
 import Reservations from "./Reservations";
-import { Table } from "react-bootstrap";
 import Endpoint from "../Endpoint";
 
 const ReservationsView = ({JWT}) => {
