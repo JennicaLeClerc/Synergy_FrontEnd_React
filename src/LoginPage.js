@@ -8,6 +8,8 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Endpoint from "./Endpoint";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //let isLoggedin = []useState();
 
@@ -17,11 +19,16 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 		password:'',
 		role:userType
 	});
+	const [error, setError] = useState(false);
+	const [success, setSucccess] = useState(false);
 
 	let navigate = useNavigate();
 	const{Username, Password} = userInput;
 
+	
+	
 	const change = (e) => {
+		setError(false)
 		e.preventDefault();
 		setUserInput({...userInput, [e.target.name]: e.target.value, ['Content-type']: 'application/json'})
 	}
@@ -34,11 +41,22 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 	
 			console.log(response);
 			if(response.status == 200){
+
+				setSucccess(true);
+				toast.success("Logged in!");
 				updateJWT(response.data.jwt)
-				navigate("/");
+				 new Promise(() => {
+					setTimeout(() => {
+						 navigate("/");
+					}, 2200);
+				});
+
+			} else {
+				setError(true)
 			}
 		} catch (e){
-			console.log(e)
+			console.log(e);
+			setError(true)
 		}
 	}
 
@@ -60,8 +78,21 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 						</form>
 					</Col>
 					<Col></Col>
+					);
+					);
 				</Row>
+				
 			</Container>
+			<div style={{textAlign: 'center', color:'red'}}>
+				<br></br>
+			{error ?
+				<h3>The credentails are incorrect, try again!</h3>
+				: ''}
+			{success ? 
+				<ToastContainer type="success" />
+				: ''}
+			</div>
+			
 		</>
 	)
 }
