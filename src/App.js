@@ -195,6 +195,7 @@ function PageRouter({JWT, updateJWT}){
 				<Route exact path = "/employee" element={<EmployeeAccountManagement JWT={JWT}/>}/>				{/*Done */}
 				<Route exact path = "/employee/edit" element={<EmployeeInfoChanger JWT={JWT}/>}/>				{/*Done */}
 				<Route exact path = "/employee/change_password" element={<EmployeePasswordChanger JWT={JWT}/>}/>{/*Done */}
+				<Route exact path = "/employee/all" element={<AllEmployee JWT ={JWT} />} />						{/*DONE*/}
 				<Route exact path = "*" element={<GoHome />}/>													{/*Done */}
 			</Routes>
 		)
