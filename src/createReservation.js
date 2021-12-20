@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { 
 	Form,
-	Button
+	Button,
+	Row,
+	Container,
+	Col
 } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -13,93 +16,114 @@ import Endpoint from './Endpoint';
 
 const Reservation = ({JWT}) => {
   
-	let navigate = useNavigate;
 	let jsonPayLoad = parseJWT(JWT);
 	let userReserveID = parseInt(jsonPayLoad.ID);
-	let Navigate = useNavigate();
 
- 	const [formValue, updateFormValue] = React.useState({
-		startDate: '',
-		endDate: '',
+	const [userInput, setUserInput] = useState({
+		startDate:'',
+		endDate:'',
 		userReserve: {
-			userID: userReserveID
+			userID:userReserveID
 		},
 		accommodations:''
- 	});
+	});
 
+	let navigate = useNavigate();
+	const {startDate, endDate, userReserve, accommodations} = userInput;
 
-	const handleChange = (e) => {
+	const change = (e) => {
 		e.preventDefault();
-		updateFormValue({...formValue, [e.target.name]: e.target.value});
+		setUserInput({...userInput, [e.target.name]: e.target.value})
 	}
 
+	console.log(userInput);
+
+
 	let axiosConfig = {
-		'Content-Type':'application/json',
-		'Authorization':'Bearer ' + JWT
+		headers: {
+			'Content-Type':'application/json',
+			'Authorization':'Bearer ' + JWT
+		}
 	};
 
-	 const handleSubmit = async (e) => {
+	console.log(userInput);
+	const submit = async (e) => {
+		e.preventDefault();
 		try{
-			const response = await axios.post(Endpoint + "/reservations/save", formValue, axiosConfig);
 
+			let body = {...userInput};
+			body.startDate = new Date(userInput.startDate);
+			body.endDate = new Date(userInput.endDate);
+
+			const response = await axios.post("http://localhost:5000/reservations/save", body, axiosConfig);
+	
+			console.log(response);
 			if(response.status == 200){
-				Navigate("/");
+				alert("Successfully Booked a Reservation!");
+				navigate("/");
 			}
 		} catch (e){
-			 console.log(e);
+			console.log(e)
 		}
 	}
 
-  	return (
+	return(
 		<>
-			<nav id="nav-placeholder"></nav>
-			<div style={{ backgroundColor: '#e9ecef', 
-				display: 'flex', justifyContent: 'center', paddingTop:'30px'}} >
-				<h1>Synergy Hotel Management System</h1>
-			</div> 
-			<div style={{
-				backgroundColor: '#e9ecef',
-				display: 'flex', justifyContent: 'center', paddingBottom:'40px', 
-				marginBottom: '30px'}}>
-			</div>	
-			<form className="resForm">
-				<h3>Book A New Reservation</h3>
-				<label className="labelClass">Your Name</label>
-				<input type="text" className="textSelect" name="fullName" value={formValue.fullName} />
-				<br/><br/>
-				<label className="labelClass">Your Email</label>
-				<input type="text" className="textSelect" name ="email" value={formValue.email}/>
-				<br/><br/>
-				<label className="labelClass">Your Phone </label>
-				<input type="text" className="textSelect" name="phone" value={formValue.phone} />
-				<br/><br/>
-				<label className="labelClass">Adults</label> 
-				<input type="number" name="adults" value={formValue.adults} />
-				<br/><br/>
-				<label className="labelClass">Children </label>
-				<input type="number" name="children" value={formValue.children} />
-				<br/><br/>
-				<label className="labelClass">Check-in Date</label>
-				<input type="date" name="startDate" value={formValue.checkin} onChange={handleChange} />
-				<br/><br/>
-				<label className="labelClass">Check-out Date </label>
-				<input type="date" name="endDate" value={formValue.checkout} onChange={handleChange}  />
-				<br/><br/>
-				<label className="labelClass">Select Room Preference </label>
-				<br/><br/>
-				<select name="choice" value={formValue.choice}>
-					<option value="">Choose a Room from the List</option>
-					<option value="connecting">1 Bed</option>
-					<option value="adjoining">2 Beds</option>
-					<option value="adjacent">3 Beds</option>
-				</select>
-				<br/><br/>
-				<label className="labelClass">Anything Else?</label>
-				<textarea value="accommodations" value={formValue.accommodations} onChange={handleChange}></textarea>
-				<br/><br/>
-				<input type="text" className="submitClass" />
-			</form>
-		</>
+		<br/><br/><br/>
+		<Container>
+			<Row>
+				<Col></Col>
+				<Col md="auto" className = "text-center">
+				<body className="reserveBody">
+					<form id="reserve" onSubmit={(e) => submit(e)}>
+
+					<div class="elem">
+						<label className="reserveLabel" htmlFor="name">Name</label>
+						
+						<input type="name" id="Name" name="Name"/>	
+					</div>
+					<div class="elem">
+						<label className="reserveLabel" htmlFor="phone">Phone Number</label>
+						
+						<input type="phone" id="phone" name="phone" />
+					</div>
+					<div className="dateElem">
+						<label className="reserveLabel" htmlFor="startDate">Check-in Date</label>
+						
+						<input type="date" id="startDate" className="checkdates" name="startDate" onChange={(e)=> change(e)} required/>	
+					</div>
+					<div className="dateElem">
+						<label className="reserveLabel" htmlFor="endDate">Check-out Date</label>
+						
+						<input type="date" id="endDate" className="checkDates" name="endDate" onChange={(e)=> change(e)} required/>
+					</div>	
+					<div class="elem">
+						<label className="reserveLabel" htmlFor="room-selection">Select Room Preference</label>
+						
+						<select id="room-selection" name="room_preference" required>
+							<option value="">Choose a Room from the List</option>
+							<option value="connecting">1 Bed</option>
+							<option value="adjoining">2 Beds</option>
+							<option value="adjacent">3 Beds</option>
+						</select>
+					</div>
+						
+					<div class="elem">
+						<label className="reserveLabel" htmlFor="message">Anything Else?</label>
+						
+						<textarea id="accommodations" name="accommodations" placeholder="Please make any additional requests here." onChange={(e)=> change(e)}></textarea>
+						
+					</div>
+						<Button style={{ backgroundColor: "#f26926"}} type="submit" value="Submit" >Submit</Button>
+					</form>
+				</body>
+				</Col>
+				<Col></Col>
+			</Row>
+		</Container>
+
+		</>				
+	
 	)
 };
 
