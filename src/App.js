@@ -23,10 +23,7 @@ import {
 	Tooltip,
 	Row,
 	Col,
-	OverlayTrigger,
-	Button,
-	Row,
-	Col
+	OverlayTrigger
 } from 'react-bootstrap';
 import ManagerPortal from './ManagerPortal';
 import RegisterUser from './RegisterUser';
@@ -45,7 +42,8 @@ import AllEmployee from './AllEmployee';
 import Endpoint from "./Endpoint";
 import axios from "axios";
 import FullCalendar from '@fullcalendar/react';
-
+import Weatherapi from './Weatherapi';
+import AddRooms from './AddRooms';
 const Amens = ["Single Bed","Pullout Bed","Double Bed","Gold Tier Bed","Compact Bathroom","Standard Bathroom","Luxuary Bathroom","Luxuary  View","Premium View","Great View","Luxuary Kitchen","Compact Kitchen","ADA Accessable"]
 
 
@@ -90,8 +88,12 @@ function GlobalNavBar({JWT}){
 				</Offcanvas.Body>
 			</Navbar.Offcanvas>
 			</Col>
+			
 			</Row>
+			<Weatherapi/>
+			
 		</Container>
+		
 		</Navbar>
 	)
 }
@@ -115,6 +117,7 @@ function NavbarS1(props){
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/edit" className="hov" style={{ paddingLeft: "15%"}}>Change Info</Link>}/>					
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/change_password" className="hov" style={{ paddingLeft: "15%"}}>Change Password</Link>}/>
+					
 					<Link to="/logout" className="hov" style={{ paddingLeft: "4.5%", paddingTop: "2%"}}>Logout </Link>
 				</>
 			)
@@ -131,6 +134,10 @@ function NavbarS1(props){
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee/edit" className="hov" style={{ paddingLeft: "15%"}}>Change Info</Link>}/>					
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/employee/change_password" className="hov" style={{ paddingLeft: "15%"}}>Change Password</Link>}/>	
+					<Button className="hov" onClick ={()=>{props.update((props.sel==3)? 0:3)}} >Rooms</Button>
+					<ShowIfMatch in={props.sel} given = {3} cont={<Link to="/employee/rooms" className="hov" style={{ paddingLeft: "15%"}}>All Rooms</Link>}/>	
+					<ShowIfMatch in={props.sel} given = {3} cont={<ShowIfMatch in={props.role} given = {"MANAGER"} cont={<Link to="/employee/rooms/add" className="hov" style={{ paddingLeft: "15%"}}>Add Room</Link>}/>}/>	
+
 					<ShowIfMatch in={props.role} given = {"MANAGER"} cont={
 						<>
 							<Button className="hov" onClick ={()=>{props.update((props.sel===4)? 0:4)}} >Management</Button>
@@ -138,6 +145,7 @@ function NavbarS1(props){
 							<ShowIfMatch in={props.sel} given={4} cont={<Link to="/employee/all" className="hov" style={{ paddingLeft: "15%"}}>All Employees</Link>}/>
 						</>
 					}/>
+					
 					<Link to="/logout" className="hov" style={{ paddingLeft: "4.5%", paddingTop: "2%"}}>Logout </Link>
 				</>
 			)
@@ -262,9 +270,8 @@ function Rooms({JWT, updateJWT}){
 			<tbody><GetRooms  rooms={rooms} JWT={JWT} updateJWT={updateJWT}></GetRooms></tbody>
 		</Table></Col></Row></Container>):(<Container ><Row><br/><br/><br/><br/></Row><Row><Col className='text-center'><h1>Loading...</h1></Col></Row><Row><Col className='text-center'><Spinner animation="border" variant="primary" /></Col></Row></Container>))
 }
-function AddRooms({JWT, updateJWT}){
-	return <table></table>
-}
+
+
 function PageRouter({JWT, updateJWT}){
 	if (!JWT){ //DONE
 		return (

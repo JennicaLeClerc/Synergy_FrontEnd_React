@@ -49,7 +49,7 @@ const CreateReservation = ({JWT}) => {
 	const submit = async (e) => {
 		e.preventDefault();
 		try{
-			const response = await axios.post(Endpoint + "/reservations", formValue, axiosConfig);
+
 
 			let body = {...userInput};
 			body.startDate = new Date(userInput.startDate);
