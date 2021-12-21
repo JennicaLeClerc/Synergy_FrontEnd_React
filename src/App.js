@@ -23,7 +23,10 @@ import {
 	Tooltip,
 	Row,
 	Col,
-	OverlayTrigger
+	OverlayTrigger,
+	Button,
+	Row,
+	Col
 } from 'react-bootstrap';
 import ManagerPortal from './ManagerPortal';
 import RegisterUser from './RegisterUser';
@@ -41,9 +44,7 @@ import UserReservation from './UserReservation';
 import AllEmployee from './AllEmployee';
 import Endpoint from "./Endpoint";
 import axios from "axios";
-
 import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
 
 const Amens = ["Single Bed","Pullout Bed","Double Bed","Gold Tier Bed","Compact Bathroom","Standard Bathroom","Luxuary Bathroom","Luxuary  View","Premium View","Great View","Luxuary Kitchen","Compact Kitchen","ADA Accessable"]
 
@@ -113,8 +114,8 @@ function NavbarS1(props){
 					<Button className="hov" onClick ={()=>{props.update((props.sel==2)? 0:2)}} >Account</Button>																
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users" className="hov" style={{ paddingLeft: "15%"}}>My Account</Link>}/>							
 					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/edit" className="hov" style={{ paddingLeft: "15%"}}>Change Info</Link>}/>					
-					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/change_password" className="hov" style={{ paddingLeft: "15%"}}>Change Password</Link>}/>		
-					<Link className="hov" to="/logout" style={{ paddingLeft: "4.5%"}}>Logout</Link>
+					<ShowIfMatch in={props.sel} given = {2} cont={<Link to="/users/change_password" className="hov" style={{ paddingLeft: "15%"}}>Change Password</Link>}/>
+					<Link to="/logout" className="hov" style={{ paddingLeft: "4.5%", paddingTop: "2%"}}>Logout </Link>
 				</>
 			)
 		}
@@ -137,7 +138,7 @@ function NavbarS1(props){
 							<ShowIfMatch in={props.sel} given={4} cont={<Link to="/employee/all" className="hov" style={{ paddingLeft: "15%"}}>All Employees</Link>}/>
 						</>
 					}/>
-					<Link className="hov" to="/logout" style={{ paddingLeft: "4.5%"}}>Logout</Link>
+					<Link to="/logout" className="hov" style={{ paddingLeft: "4.5%", paddingTop: "2%"}}>Logout </Link>
 				</>
 			)
 
@@ -466,40 +467,6 @@ function MainPage(){
 					<Carousel.Caption></Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>
-		</>
-	)
-}
-
-function UserLogin(){
-	return(
-		<>
-			<br/><br/><br/>
-			<Container>
-				<Row>
-					<Col></Col>
-					<Col md="auto" className = "text-center">
-						<form id="login-form">
-							<input type="text" name="username" id="username-field" className="login-form-field" placeholder="Username" />
-							<br/><br/>
-							<input type="password" name="password" id="password-field" className="login-form-field" placeholder="Password" />
-							<br/><br/>
-							<Button>
-								Login
-							</Button>
-							<br/><br/>
-							<p id="forgot-password" align="center"><a href="#">Forgot Password?</a></p>
-						</form>
-					</Col>
-					<Col></Col>
-				</Row>
-			</Container>
-			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="hide1" id = "error">
-					<p align="center">*Username or Password are Incorrect*</p>
-				</div>
-				<div class="col-sm-4"></div>
-			</div>
 		</>
 	)
 }

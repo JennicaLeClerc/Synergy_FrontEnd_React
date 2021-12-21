@@ -6,13 +6,14 @@ import {
 	Row,
 	Col,
 	Form,
-	FloatingLabel,
-	Alert
+	FloatingLabel
 } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Endpoint from "../Endpoint";
 import parseJWT from "../parseJWT";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function UserPasswordChanger({JWT}){
 
@@ -21,6 +22,9 @@ function UserPasswordChanger({JWT}){
 		new:'',
 		old:''
 	});
+
+	const [error, setError] = useState(false);
+	const [success, setSucccess] = useState(false);
 
 	// Updating userInfo
 	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer " + JWT}};
@@ -37,11 +41,24 @@ function UserPasswordChanger({JWT}){
 		console.log(userInput);
 		e.preventDefault();
 		//axios put call
-		var uID = parseJWT(JWT).ID;
-		const response = await axios.put(Endpoint + "/users/" + uID, userInput, axiosConfig);
-		console.log(response);
-		if(response.status === 200){
-			navigate("/users");
+		try{
+			var uID = parseJWT(JWT).ID;
+			const response = await axios.put(Endpoint + "/users/" + uID, userInput, axiosConfig);
+			console.log(response);
+			if(response.status === 200){
+				setSucccess(true);
+				toast.success("Password Changed!");
+				new Promise(() => {
+					setTimeout(() => {
+						navigate("/users");
+					}, 2200);
+				});
+			} else {
+				setError(true)
+			}
+		} catch(e){
+			console.log(e);
+			setError(true)
 		}
 	}
 
@@ -76,21 +93,17 @@ function UserPasswordChanger({JWT}){
 					</Col>
 				</Row>
 			</Container>
+			<div style={{textAlign: 'center', color:'red'}}>
+				<br></br>
+				{error ?
+					<h3>The credentails are incorrect, try again!</h3>
+					: ''}
+				{success ? 
+					<ToastContainer type="success" />
+					: ''}
+			</div>
 		</>
 	)
-}
-
-function WrongPassword(){
-	const [show, setShow] = useState(true);
-
-  	if (show) {
-		return (
-			<Alert variant="danger" onClose={() => setShow(false)} dismissible>
-				<Alert.Heading>Username or Password incorrect</Alert.Heading>
-			</Alert>
-		)
-	}
-	return <Button onClick={() => setShow(true)}>Show Alert</Button>;
 }
 
 export default UserPasswordChanger;

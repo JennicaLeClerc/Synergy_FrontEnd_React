@@ -13,6 +13,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Endpoint from "../Endpoint";
 import parseJWT from "../parseJWT";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EmployeePasswordChanger({JWT}){
 
@@ -22,6 +24,9 @@ function EmployeePasswordChanger({JWT}){
 		new:'',
 		old:''
 	});
+
+	const [error, setError] = useState(false);
+	const [success, setSucccess] = useState(false);
 
 	let axiosConfig = {headers: {"Content-Type":"application/json", "Authorization":"Bearer " + JWT}};
 
@@ -36,13 +41,27 @@ function EmployeePasswordChanger({JWT}){
 		console.log('submited');
 		console.log(employeeInput);
 		e.preventDefault();
-		//axios put call
-		var uID = parseJWT(JWT).ID;
-		const response = await axios.put(Endpoint + "/employee/" + uID, employeeInput, axiosConfig);
-		console.log(response);
-		if(response.status === 200){
-			navigate("/employee");
+		try{
+			//axios put call
+			var uID = parseJWT(JWT).ID;
+			const response = await axios.put(Endpoint + "/employee/" + uID, employeeInput, axiosConfig);
+			console.log(response);
+			if(response.status === 200){
+				setSucccess(true);
+				toast.success("Password Changed!");
+				new Promise(() => {
+					setTimeout(() => {
+						navigate("/employee");
+					}, 2200);
+				});
+			} else {
+				setError(true)
+			}
+		} catch(e){
+			console.log(e);
+			setError(true)
 		}
+
 	}
 
 	return(
