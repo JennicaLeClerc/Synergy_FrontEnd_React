@@ -4,7 +4,8 @@ import {
 	Button,
 	Row,
 	Container,
-	Col
+	Col,
+	FloatingLabel
 } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -12,6 +13,8 @@ import './createReservation.css';
 import axios from 'axios';
 import parseJWT from "./parseJWT";
 import Endpoint from './Endpoint';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateReservation = ({JWT}) => {
   
@@ -29,6 +32,8 @@ const CreateReservation = ({JWT}) => {
 
 	let navigate = useNavigate();
 	const {startDate, endDate, userReserve, accommodations} = userInput;
+	const [error, setError] = useState(false);
+	const [success, setSucccess] = useState(false);
 
 	const change = (e) => {
 		e.preventDefault();
@@ -58,8 +63,15 @@ const CreateReservation = ({JWT}) => {
 	
 			console.log(response);
 			if(response.status == 200){
-				alert("Successfully Booked a Reservation!");
-				navigate("/");
+				setSucccess(true);
+				toast.success("Successfully Booked a Reservation!");
+				new Promise(() => {
+					setTimeout(() => {
+						navigate("/user");
+					}, 2200);
+				});
+			} else {
+				setError(true)
 			}
 		} catch (e){
 			console.log(e)
@@ -109,6 +121,15 @@ const CreateReservation = ({JWT}) => {
 					<Col></Col>
 				</Row>
 			</Container>
+			<div style={{textAlign: 'center', color:'red'}}>
+				<br></br>
+				{error ?
+					<h3>Something went wrong, please try again!</h3>
+					: ''}
+				{success ? 
+					<ToastContainer type="success" />
+					: ''}
+			</div>
 		</>
 	)
 };
