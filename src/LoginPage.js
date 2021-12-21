@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Button,
 	Container,
@@ -14,6 +14,10 @@ import 'react-toastify/dist/ReactToastify.css';
 //let isLoggedin = []useState();
 
 const LoginPage = ({JWT, updateJWT, userType}) => {
+	useEffect(cleanJWT,[])
+	function cleanJWT(){
+		updateJWT("")
+	}
 	const [userInput, setUserInput] = useState({
 		username:'',
 		password:'',

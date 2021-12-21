@@ -55,6 +55,7 @@ const CreateReservation = ({JWT}) => {
 		e.preventDefault();
 		try{
 
+
 			let body = {...userInput};
 			body.startDate = new Date(userInput.startDate);
 			body.endDate = new Date(userInput.endDate);
