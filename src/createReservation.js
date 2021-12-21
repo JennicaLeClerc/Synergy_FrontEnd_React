@@ -13,7 +13,7 @@ import axios from 'axios';
 import parseJWT from "./parseJWT";
 import Endpoint from './Endpoint';
 
-const Reservation = ({JWT}) => {
+const CreateReservation = ({JWT}) => {
   
 	let jsonPayLoad = parseJWT(JWT);
 	let userReserveID = parseInt(jsonPayLoad.ID);
@@ -54,7 +54,7 @@ const Reservation = ({JWT}) => {
 			body.startDate = new Date(userInput.startDate);
 			body.endDate = new Date(userInput.endDate);
 
-			const response = await axios.post(Endpoint + "/reservations/save", body, axiosConfig);
+			const response = await axios.post(Endpoint + "/reservations", body, axiosConfig);
 	
 			console.log(response);
 			if(response.status == 200){
@@ -113,4 +113,4 @@ const Reservation = ({JWT}) => {
 	)
 };
 
-export default Reservation;
+export default CreateReservation;
