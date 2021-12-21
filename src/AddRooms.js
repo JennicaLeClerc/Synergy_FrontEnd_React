@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Container, ListGroup,Row,Col,Card,CardGroup, Button} from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
 import Endpoint from "./Endpoint";
 const Amens = ["Single Bed","Pullout Bed","Double Bed","Gold Tier Bed","Compact Bathroom","Standard Bathroom","Luxuary Bathroom","Luxuary  View","Premium View","Great View","Luxuary Kitchen","Compact Kitchen","ADA Accessable"]
 
@@ -36,6 +37,8 @@ export default function AddRooms({JWT, updateJWT}){
 		let body = {amenitiesList:ams};
 		console.log(body)
 		const response = await axios.post(Endpoint + "/rooms", body, axiosConfig);
+		addAms([])
+		toast.success('Room has been created');
 	}
 	function RenderAmens(){
 		let i =0
@@ -83,8 +86,8 @@ export default function AddRooms({JWT, updateJWT}){
 			<Row xs={1} md={3} className="g-4" style={{border:"2px solid red"}}>
 				<GetAmens/>
 			</Row>
+			<ToastContainer />
 		</Container>
-
 	)
 
 }
