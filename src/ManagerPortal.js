@@ -6,6 +6,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import Endpoint from "./Endpoint";
+import { Navigate } from "react-router";
 
 const ManagerPortal = () => {
 	const [userInput, setUserInput] = useState({
@@ -15,6 +16,8 @@ const ManagerPortal = () => {
 		password: '', 
 		employeeType: ''
 	});
+    const [redirect, setRedirect] = useState(false);
+
 
 	const { firstName, lastName, username, password, employeeType } = userInput;
 
@@ -32,6 +35,7 @@ const ManagerPortal = () => {
 		//axios post call
 		const response = await axios.post(Endpoint + "/employee", userInput);
 		console.log(response);
+		setRedirect(true)
 	}
 
 	return (
@@ -105,6 +109,14 @@ const ManagerPortal = () => {
 					</div>
 				</div>
 			</div>
+			{redirect ? 
+			<>
+
+			<Navigate to="/employee/all" />
+			
+			</>
+			:''
+			}
 		</>
 	)
 }

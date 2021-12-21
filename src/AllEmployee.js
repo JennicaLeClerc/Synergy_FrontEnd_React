@@ -50,7 +50,7 @@ const AllEmployee = ({JWT}) => {
 												<td>{value.id}</td>
 												<td>{value.firstName}</td>
 												<td>{value.lastName}</td>
-												<td>{value.role}</td>
+												<td>{value.employeeType}</td>
 											</tr>
 										</tbody>
 									</>
