@@ -19,13 +19,12 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 		password:'',
 		role:userType
 	});
+
 	const [error, setError] = useState(false);
 	const [success, setSucccess] = useState(false);
 
 	let navigate = useNavigate();
 	const{Username, Password} = userInput;
-
-	
 	
 	const change = (e) => {
 		setError(false)
@@ -45,12 +44,11 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 				setSucccess(true);
 				toast.success("Logged in!");
 				updateJWT(response.data.jwt)
-				 new Promise(() => {
+				new Promise(() => {
 					setTimeout(() => {
-						 navigate("/");
+						navigate("/");
 					}, 2200);
 				});
-
 			} else {
 				setError(true)
 			}
@@ -78,21 +76,17 @@ const LoginPage = ({JWT, updateJWT, userType}) => {
 						</form>
 					</Col>
 					<Col></Col>
-					);
-					);
 				</Row>
-				
 			</Container>
 			<div style={{textAlign: 'center', color:'red'}}>
 				<br></br>
-			{error ?
-				<h3>The credentails are incorrect, try again!</h3>
-				: ''}
-			{success ? 
-				<ToastContainer type="success" />
-				: ''}
+				{error ?
+					<h3>The credentails are incorrect, try again!</h3>
+					: ''}
+				{success ? 
+					<ToastContainer type="success" />
+					: ''}
 			</div>
-			
 		</>
 	)
 }
