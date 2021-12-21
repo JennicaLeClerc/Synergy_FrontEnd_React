@@ -13,7 +13,7 @@ export default function UserReservation({JWT}){
 	useEffect(()=>{ allReservations(); },[])
 	const allReservations = async () => {
 		console.log("Bearer " + JWT)
-		const response = await axios.post(Endpoint + "/reservations/username", null, { headers: { "Authorization": "Bearer " + JWT }, params: {username:parseJWT(JWT).sub, pageNumber: 0, pageSize: 10000, sortBy: 'reservationID' } }).then(
+		const response = await axios.get(Endpoint + "/reservations/username", { headers: { "Authorization": "Bearer " + JWT }, params: {username:parseJWT(JWT).sub, pageNumber: 0, pageSize: 10000, sortBy: 'reservationID' } }).then(
 			(data) => data
 		)
 		console.log('hit2')

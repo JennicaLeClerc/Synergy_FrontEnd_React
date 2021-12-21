@@ -40,7 +40,7 @@ const Reservation = ({JWT}) => {
 
 	 const handleSubmit = async (e) => {
 		try{
-			const response = await axios.post(Endpoint + "/reservations/save", formValue, axiosConfig);
+			const response = await axios.post(Endpoint + "/reservations", formValue, axiosConfig);
 
 			if(response.status == 200){
 				Navigate("/");
