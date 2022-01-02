@@ -55,5 +55,5 @@ Bonus goals:
 - Secure your Java API using Spring Security
 - Java API will be adequately documented (Java Docs and web endpoint documentation [Swagger/OpenAPI])
  
-## Front End
+## Back End
 https://github.com/JennicaLeClerc/Synergy_Project2_Backend.git
